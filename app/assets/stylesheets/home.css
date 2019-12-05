@@ -1,0 +1,93 @@
+.container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+div.submit-container {
+    height: 10em;
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+.card-body-temp {
+    color: #2196f3;
+    column-count: 2;
+}
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+}
+.container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+.container input:checked ~ .checkmark {
+  background-color: #2196f3;
+}
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+.container .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+div.child {
+  margin-left: 25px;
+}
+div.grandchild {
+  margin-left: 50px;
+}
+div.indent-root {
+  font-weight: 700;
+}
+div.indent-child {
+  font-weight: 600;
+  text-indent: 25px;
+}
+div.indent-grandchild {
+  font-weight: 500;
+  text-indent: 50px;
+}
+.card.animal {
+    display: block;
+    position: relative;
+    margin-left: 325px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+}

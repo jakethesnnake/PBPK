@@ -1,0 +1,17 @@
+<%= form_with(local: true, remote: false, url: set_animal_url) do |f| %>
+  <div class="card">
+    <div class="radio-button-btn-wrapper">
+      <%= f.radio_button :recommended, 1, class: "radio-button-btn background-red" %>
+      <%= label :recommended, 'no', class: "radio-button-btn-label white" %>
+    </div>
+    <div class="radio-button-btn-wrapper">
+      <%= f.radio_button :recommended, 2, class: "radio-button-btn background-red" %>
+      <%= label :recommended, 'no', class: "radio-button-btn-label white" %>
+    </div>
+    <div class="radio-button-btn-wrapper">
+      <%= f.radio_button :recommended, 3, class: "radio-button-btn background-red" %>
+      <%= label :recommended, 'no', class: "radio-button-btn-label white" %>
+    </div>
+    <%= f.submit '', class: 'd-none', id: 'submitMyForm' %>
+  </div>
+<% end %>

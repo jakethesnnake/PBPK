@@ -1,0 +1,10 @@
+<%= render :partial => 'table', :locals => { :animal => Animal.first } %>
+<%= render :partial => 'table', :locals => { :animal => Animal.second } %><br>
+
+<%= render 'filter' %>
+
+<%#= @animals.each do |a| %>
+  <%#= render :partial => 'table', :locals => { :animal => a } %>
+<%# end %>
+
+<!--<%#= render 'filter' %><br>-->

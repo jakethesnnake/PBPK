@@ -1,0 +1,30 @@
+<table id="t01">
+  <h1><%= animal.name %></h1>
+
+  <tr>
+    <th>Organ Name</th>
+    <th>Mean</th>
+    <th>SD</th>
+    <th>Sample Size</th>
+    <th>Number of Studies</th>
+    <th>References</th>
+  </tr>
+
+  <% animal.filtered_weights(@organs).each do |weight| %>
+    <tr>
+      <td><%= render :partial => 'weight_name', locals: { weight: weight } %></td>
+      <td><%= weight.mean %></td>
+      <td><%= weight.standard_deviation %></td>
+      <td><%= weight.sample_size %></td>
+      <td><%= weight.number_of_studies %></td>
+      <td>
+        <% links = reference_links_from_weight(weight) %>
+        <% if links && links.count > 0 %>
+          <% links.each do |link| %>
+            <%= link + " " %>
+          <% end %>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+</table>

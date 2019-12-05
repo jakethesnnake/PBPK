@@ -1,0 +1,30 @@
+<%= form_with(local: true, remote: false, url: { action: "filter" }) do |form| %>
+
+  <h1>Animals</h1>
+  <% Animal.all.each do |animal| %>
+    <label class="container"><%= "#{animal.name}" %>
+      <%= check_box_tag 'animal_ids[]', animal.id, checked(animal), :id => "animal_ids_#{animal.id}", class: 'checkmark' %>
+      <span class="checkmark"></span>
+    </label>
+  <% end %>
+
+  <h1>Parameters</h1>
+  <% Parameter.all.each do |parameter| %>
+    <label class="container"><%= "#{parameter.name}" %>
+      <%= check_box_tag 'parameter_ids[]', parameter.id, checked(parameter), :id => "parameter_ids_#{parameter.id}", class: 'checkmark' %>
+      <span class="checkmark"></span>
+    </label>
+  <% end %>
+
+  <h1>Organs</h1>
+  <% Organ.all.each do |organ| %>
+    <label class="container"><%= "#{organ.name}" %>
+      <%= check_box_tag 'organ_ids[]', organ.id, checked(organ), :id => "organ_ids_#{organ.id}", class: 'checkmark' %>
+      <span class="checkmark"></span>
+    </label>
+  <% end %>
+
+  <div class="actions">
+    <%= form.submit "Filter" %>
+  </div>
+<% end %>

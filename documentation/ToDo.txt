@@ -1,0 +1,8 @@
+- UNSELECT ALL function
+- Heirarchy of Organ Categories
+- JS auto-updates
+
+
+Other
+- Delete 'test' folder
+- AuthorPublications back to AuthorsPublications

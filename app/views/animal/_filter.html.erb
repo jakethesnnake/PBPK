@@ -1,0 +1,10 @@
+<%= form_with(local: true, remote: false, url: { action: "filter" }) do |form| %>
+
+  <%= "Animal " %><%= collection_select(:animal_id, nil, Animal.all, :id, :name, prompt: true) %><br><br>
+  <%= "Parameter " %><%= collection_select(:parameter, :id, Parameter.all, :id, :name, prompt: true) %><br><br>
+  <%= "Organ " %><%= collection_select(:organ, :id, Organ.all, :id, :name, prompt: true) %><br><br>
+
+  <div class="actions">
+    <%= form.submit "Filter" %>
+  </div>
+<% end %>

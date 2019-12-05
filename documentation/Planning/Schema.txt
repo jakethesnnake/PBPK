@@ -1,0 +1,13 @@
+Animals
+	id
+	name
+Organs
+	id
+	name
+	parent_id, null: true
+RelativeOrganWeights
+	organ_id
+	mean
+	standard_deviation
+	sample_size
+	amount_of_studies

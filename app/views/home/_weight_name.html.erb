@@ -1,0 +1,7 @@
+<% if weight.organ.is_grandchild? %>
+  <div class="indent-grandchild"><%= weight.organ_name %></div>
+<% elsif weight.organ.is_child? %>
+  <div class="indent-child"><%= weight.organ_name %></div>
+<% else %>
+  <div class="indent-root"><%= weight.organ_name %></div>
+<% end %>

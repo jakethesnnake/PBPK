@@ -1,0 +1,23 @@
+<table id="t01">
+  <h1><%= animal.name %></h1>
+
+  <tr>
+    <th>Organ Name</th>
+    <th>Mean</th>
+    <th>SD</th>
+    <th>Sample Size</th>
+    <th>Number of Studies</th>
+    <th>References</th>
+  </tr>
+
+  <% animal.organ_weights.each do |weight| %>
+    <tr>
+      <td><%= weight.organ_name %></td>
+      <td><%= weight.mean %></td>
+      <td><%= weight.standard_deviation %></td>
+      <td><%= weight.sample_size %></td>
+      <td><%= weight.number_of_studies %></td>
+      <td><%= references_from_organ_weight(weight) %></td>
+    </tr>
+  <% end %>
+</table>
