@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Animal, type: :model do
+  let!(:animal) { FactoryBot.create(:animal) }
+
   describe '.name' do
     subject { FactoryBot.build(:animal, name: name) }
 
@@ -14,6 +16,31 @@ RSpec.describe Animal, type: :model do
       let(:name) { "AnimalName" }
 
       it { is_expected.to be_valid }
+    end
+  end
+
+  describe '#organs' do
+    subject { animal.organs }
+
+    let!(:o1) { FactoryBot.create(:organ) }
+    let!(:o2) { FactoryBot.create(:organ) }
+
+    context 'when no organs' do
+      it { is_expected.to eq([]) }
+    end
+
+    context 'when 1 organ' do
+      let!(:o_w1) { FactoryBot.create(:weight, organ_id: o1.id, animal_id: animal.id) }
+
+      it { is_expected.to include(o1) }
+    end
+
+    context 'when 2 organs' do
+      let!(:o_w1) { FactoryBot.create(:weight, organ_id: o1.id, animal_id: animal.id) }
+      let!(:o_w2) { FactoryBot.create(:weight, organ_id: o2.id, animal_id: animal.id) }
+
+      it { is_expected.to include(o1) }
+      it { is_expected.to include(o2) }
     end
   end
 
