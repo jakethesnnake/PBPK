@@ -38,7 +38,7 @@
 
             <div class="filter-content">
               <div class="card-body-temp">
-                <% @organs.each do |organ| %>
+                <% Organ.all.each do |organ| %>
                   <% css_class = organ_indent_class(organ) %>
                   <% if css_class %>
                     <div class="<%= css_class %>">

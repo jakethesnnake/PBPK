@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   get 'home/filter'
   get 'home/index'
   get 'home/empty'
-  root 'home#empty'
+  root 'home#index'
 
   post 'home/filter', to: 'home#filter', as: 'filter'
 
