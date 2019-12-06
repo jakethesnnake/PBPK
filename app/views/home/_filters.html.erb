@@ -1,11 +1,3 @@
-<script>
-    document.addEventListener('click', function(event){
-        if(event.target.classList.contains('radio-button-btn')) {
-            document.querySelector('#submitMyForm').click();
-        }
-    });
-</script>
-
 <br>
   <h1 class="text-center"><%= "Physiological Parameters" %></h1>
 <hr>
@@ -14,15 +6,11 @@
     <div class="animal">
       <%= render :partial => 'shared/animal_radio_box_form' %>
     </div>
-</div>
-
-<br>
 
 <%= form_with(local: true, remote: false, url: { action: "filter" }) do |form| %>
   <div class="container">
-    <div class="row">
-      <aside class="col-sm-3">
-        <div class="card">
+      <div class="column">
+        <div class="card parameters">
           <article class="card-group-item">
             <header class="card-header">
               <h6 class="title">Parameters</h6>
@@ -37,9 +25,10 @@
             </div>
           </article>
         </div>
-      </aside>
+      </div>
+    <br>
 
-      <aside class="col-sm-6">
+      <div class="column">
         <div class="card">
           <article class="card-group-item">
             <header class="card-header">
@@ -62,9 +51,9 @@
             </div>
           </article>
         </div>
-      </aside>
-    </div>
+      </div>
   </div>
+</div>
 
   <div class="submit-container">
     <div class="actions">
@@ -74,3 +63,11 @@
     </div>
   </div>
 <% end %>
+
+<script>
+    document.addEventListener('click', function(event){
+        if(event.target.classList.contains('radio-button-btn')) {
+            document.querySelector('#submitMyForm').click();
+        }
+    });
+</script>

@@ -23,6 +23,9 @@ div.submit-container {
   height: 0;
   width: 0;
 }
+.parameters {
+    max-width: 40%;
+}
 .card-body-temp {
     color: #2196f3;
     column-count: 2;
