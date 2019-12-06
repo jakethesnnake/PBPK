@@ -174,3 +174,5 @@ Weight.find_by_id(25).add_reference_number_list([1, 24, 26]) # thymus
 # CSV file reading
 CSV.read("lib/csv-tables/table2-with-ids.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
 CSV.read("lib/csv-tables/table3-with-ids.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
+
+# Weight.create!(organ_id: 29, animal_id: 3)
