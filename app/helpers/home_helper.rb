@@ -9,6 +9,11 @@ module HomeHelper
     raise Exception
   end
 
+  # <TEMP>
+  def get_organs
+    @animal.try(:organs) || Organ.all
+  end
+
   def organ_indent_class(organ)
     return "grandchild" if organ.is_grandchild?
     "child" if organ.is_child?

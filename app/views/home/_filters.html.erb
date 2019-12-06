@@ -33,12 +33,13 @@
           <article class="card-group-item">
             <header class="card-header">
               <h6 class="title">Organs</h6>
-              <%= render :partial => 'shared/organ_checkbox_in_header', locals: { organ: Organ.first } %>
-            </header>
 
+              <%= link_to "Select All", home_filter_path(animal_id: @animal.id), class: 'btn btn-primary' %>
+              <%= link_to "Unselect All", home_empty_path(animal_id: @animal.id), class: 'btn btn-primary' %>
+            </header>
             <div class="filter-content">
               <div class="card-body-temp">
-                <% Organ.all.each do |organ| %>
+                <% get_organs.each do |organ| %>
                   <% css_class = organ_indent_class(organ) %>
                   <% if css_class %>
                     <div class="<%= css_class %>">
@@ -58,9 +59,9 @@
 
   <div class="submit-container">
     <div class="actions">
-      <%= link_to "Unselect All", class: 'btn btn-default', action: :empty %>
+      <%#= link_to "Unselect All", class: 'btn btn-default', action: :empty %>
       <%= form.submit "Filter", class: 'btn btn-primary' %>
-      <%= link_to "Select All", class: 'btn btn-default', action: :index %>
+      <%#= link_to "Select All", class: 'btn btn-default', action: :index %>
     </div>
   </div>
 <% end %>
