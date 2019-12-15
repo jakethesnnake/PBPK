@@ -7,6 +7,17 @@ class Weight < ApplicationRecord
   validates :sample_size, numericality: true, allow_blank: true
   validates :number_of_studies, numericality: true, allow_blank: true
 
+  after_create :add_list
+
+  # <TEMP>
+  def add_list
+    return unless reference_string
+    num_arr = reference_string.split(/,/)
+    return unless num_arr && num_arr.count > 0
+    arr = num_arr.map { |n| n.to_i }
+    Weight.find_by_id(id).add_reference_number_list(arr)
+  end
+
   def publications
     sets = WeightPublication.where(weight_id: id)
     return [] unless sets.count > 0

@@ -1,6 +1,70 @@
 require 'rails_helper'
 
 RSpec.describe Organ, type: :model do
+  describe '#organs_and_children_from_id_list' do
+    subject { Organ.organs_and_children_from_id_list(ids) }
+
+    let!(:o1) { FactoryBot.create(:organ) }
+    let!(:o2) { FactoryBot.create(:organ) }
+    let!(:o3) { FactoryBot.create(:organ) }
+
+    context 'when nil ids parameter' do
+      let(:ids) { nil }
+
+      it { is_expected.to eq([]) }
+    end
+
+    context 'when empty ids parameter' do
+      let(:ids) { [] }
+
+      it { is_expected.to eq([]) }
+    end
+
+    context 'when 1 id listed' do
+      let(:ids) { [o1.id] }
+
+      it { is_expected.to include(o1) }
+      it { is_expected.not_to include(o2) }
+      it { is_expected.not_to include(o3) }
+    end
+
+    context 'when 2 ids listed' do
+      let(:ids) { [o1.id, o3.id] }
+
+      it { is_expected.to include(o1) }
+      it { is_expected.not_to include(o2) }
+      it { is_expected.to include(o3) }
+    end
+
+    context 'when all ids listed' do
+      let(:ids) { [o1.id, o2.id, o3.id] }
+
+      it { is_expected.to include(o1) }
+      it { is_expected.to include(o2) }
+      it { is_expected.to include(o3) }
+    end
+
+    context 'when children exist' do
+      let!(:o4) { FactoryBot.create(:organ, parent_id: o1.id) }
+      let(:ids) { [o1.id] }
+
+      it { is_expected.to include(o1) }
+      it { is_expected.to include(o4) }
+      it { is_expected.not_to include(o3) }
+      it { is_expected.not_to include(o3) }
+    end
+
+    context 'when grandchildren exist' do
+      let!(:o4) { FactoryBot.create(:organ, parent_id: o1.id) }
+      let!(:o5) { FactoryBot.create(:organ, parent_id: o4.id) }
+      let(:ids) { [o1.id] }
+
+      it { is_expected.to include(o1) }
+      it { is_expected.to include(o4) }
+      it { is_expected.to include(o5) }
+    end
+  end
+
   describe '#is_child?' do
     subject { organ.is_child? }
 

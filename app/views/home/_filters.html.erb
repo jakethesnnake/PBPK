@@ -1,54 +1,45 @@
-<script>
-    document.addEventListener('click', function(event){
-        if(event.target.classList.contains('radio-button-btn')) {
-            document.querySelector('#submitMyForm').click();
-        }
-    });
-</script>
-
 <br>
   <h1 class="text-center"><%= "Physiological Parameters" %></h1>
 <hr>
 
 <div class="row">
-    <div class="animal">
-      <%= render :partial => 'shared/animal_radio_box_form' %>
-    </div>
-</div>
+  <div class="animal">
+    <%= render :partial => 'shared/animal_radio_box_form', locals: { current_animal: @animal } %>
+  </div>
+  <%= form_with(local: true, remote: false, url: { action: "filter" }) do |form| %>
+    <div class="container">
+        <div class="column">
+          <div class="card parameters">
+            <article class="card-group-item">
+              <header class="card-header">
+                <h6 class="title">Parameters</h6>
+              </header>
 
-<br>
-
-<%= form_with(local: true, remote: false, url: { action: "filter" }) do |form| %>
-  <div class="container">
-    <div class="row">
-      <aside class="col-sm-3">
-        <div class="card">
-          <article class="card-group-item">
-            <header class="card-header">
-              <h6 class="title">Parameters</h6>
-            </header>
-
-            <div class="filter-content">
-              <div class="card-body">
-                <% Parameter.all.each do |parameter| %>
-                  <%= render :partial => 'shared/parameter_checkbox', locals: { parameter: parameter } %>
-                <% end %>
+              <div class="filter-content">
+                <div class="card-body">
+                  <% Parameter.all.each do |parameter| %>
+                    <%= render :partial => 'shared/parameter_checkbox', locals: { parameter: parameter } %>
+                  <% end %>
+                </div>
               </div>
-            </div>
-          </article>
+            </article>
+          </div>
         </div>
-      </aside>
-
-      <aside class="col-sm-6">
+      <br>
+    </div>
+    <div class="container pull-right">
+      <div class="column-temp">
         <div class="card">
           <article class="card-group-item">
             <header class="card-header">
               <h6 class="title">Organs</h6>
-            </header>
 
+              <%= link_to "Select All", home_filter_path(animal_id: @animal.id), class: 'btn btn-primary' %>
+              <%= link_to "Unselect All", home_empty_path(animal_id: @animal.id), class: 'btn btn-primary' %>
+            </header>
             <div class="filter-content">
               <div class="card-body-temp">
-                <% Organ.all.each do |organ| %>
+                <% get_organs.each do |organ| %>
                   <% css_class = organ_indent_class(organ) %>
                   <% if css_class %>
                     <div class="<%= css_class %>">
@@ -62,15 +53,23 @@
             </div>
           </article>
         </div>
-      </aside>
+      </div>
     </div>
   </div>
 
   <div class="submit-container">
     <div class="actions">
-      <%= link_to "Unselect All", class: 'btn btn-default', action: :empty %>
+      <%#= link_to "Unselect All", class: 'btn btn-default', action: :empty %>
       <%= form.submit "Filter", class: 'btn btn-primary' %>
-      <%= link_to "Select All", class: 'btn btn-default', action: :index %>
+      <%#= link_to "Select All", class: 'btn btn-default', action: :index %>
     </div>
   </div>
 <% end %>
+
+<script>
+    document.addEventListener('click', function(event){
+        if(event.target.classList.contains('radio-button-btn')) {
+            document.querySelector('#submitMyForm').click();
+        }
+    });
+</script>

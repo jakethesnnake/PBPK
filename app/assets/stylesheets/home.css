@@ -10,6 +10,9 @@
   -ms-user-select: none;
   user-select: none;
 }
+.row {
+    column-count: 3;
+}
 div.submit-container {
     height: 10em;
     display: flex;
@@ -23,9 +26,12 @@ div.submit-container {
   height: 0;
   width: 0;
 }
+.parameters {
+    max-width: 40%;
+}
 .card-body-temp {
     color: #2196f3;
-    column-count: 2;
+    column-count: 3;
 }
 .checkmark {
   position: absolute;

@@ -6,7 +6,9 @@ require 'csv'
 animals = [
     { name: "Cattle", id: 1 },
     { name: "Beef Cattle", id: 2, parent_id: 1 },
-    { name: "Dairy Cows", id: 3, parent_id: 1 }
+    { name: "Dairy Cows", id: 3, parent_id: 1 },
+    { name: "Jersey", id: 4, parent_id: 3 },
+    { name: "Holstein", id: 5, parent_id: 3 }
 ]
 organs = [
     { name: "Adrenals", id: 1 },
@@ -134,8 +136,10 @@ references = [
 
 parameters = [
     {name: "Organ Weight", id: 1},
-    # {name: "Tissue Volume", id: 2},
-    # {name: "Blood Flow", id: 3}
+    {name: "Blood Flow", id: 2},
+    {name: "Cardiac Output", id: 3},
+    {name: "Vascular Space Fraction", id: 4},
+    {name: "Hematocrit", id: 5},
 ]
 
 animals.each { |animal| Animal.create!(animal) }
@@ -172,5 +176,6 @@ Weight.find_by_id(24).add_reference_number_list([1]) # thyroid
 Weight.find_by_id(25).add_reference_number_list([1, 24, 26]) # thymus
 
 # CSV file reading
-CSV.read("tmp/csv-tables/table2-with-ids.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
-CSV.read("tmp/csv-tables/table3-with-ids.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
+CSV.read("lib/csv-tables/table2-with-ids.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
+CSV.read("lib/csv-tables/table3-with-ids.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
+CSV.read("lib/csv-tables/table4-with-ids.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
