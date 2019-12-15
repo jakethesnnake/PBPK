@@ -12,6 +12,9 @@ class CreateWeights < ActiveRecord::Migration[5.2]
 
       # list of reference numbers
       t.string :reference_string, null: true
+
+      # t test
+      t.string :t_test, null: true
     end
   end
 end

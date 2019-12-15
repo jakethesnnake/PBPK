@@ -1,4 +1,5 @@
-<%= form_with(local: true, remote: false, url: set_animal_url) do |f| %>
+<!--locals: { current_animal }-->
+<%= form_with(local: true, remote: false, url: home_filter_path) do |f| %>
   <div class="card animal">
     <article class="card-group-item">
       <header class="card-header">
@@ -11,13 +12,13 @@
             <% if css_class %>
               <div class="<%= css_class %>">
                 <div class="radio-button-btn-wrapper mr-2">
-                  <%= f.radio_button :animal_id, "#{animal.id}", class: "radio-button-btn background-red" %>
-                  <%= label_tag :anim_id, animal.name, class: "radio-button-btn-label white" %>
+                  <%= f.radio_button :animal_id, "#{animal.id}", checked: current_animal == animal, class: "radio-button-btn background-red" %>
+                  <%= label_tag :animal_id, animal.name, class: "radio-button-btn-label white" %>
                 </div>
               </div>
             <% else %>
               <div class="radio-button-btn-wrapper mr-2">
-                <%= f.radio_button :animal_id, "#{animal.id}", class: "radio-button-btn background-red" %>
+                <%= f.radio_button :animal_id, "#{animal.id}", checked: current_animal == animal, class: "radio-button-btn background-red" %>
                 <%= label_tag :animal_id, animal.name, class: "radio-button-btn-label white" %>
               </div>
             <% end %>

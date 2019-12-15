@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(version: 2019_11_15_203805) do
     t.integer "sample_size"
     t.integer "number_of_studies"
     t.string "reference_string"
+    t.string "t_test"
   end
 
 end

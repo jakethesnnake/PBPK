@@ -9,14 +9,13 @@ class Animal < ApplicationRecord
     Animal.find_by_id(parent_id)
   end
 
-  # Public: returns all organs for animal (that have weights associated)
-  # <TEST>
+  # Public: returns all organs for animal (that has an associated weight)
   def organs
     weights = organ_weights
-    return unless weights.count > 0
+    return [] unless weights.count > 0
     organs = []
     weights.each do |weight|
-      organ = Organ.find_by_id(weight.organ_id.to_i)
+      organ = Organ.find_by_id(weight.organ_id)
       organs << organ
     end
     organs

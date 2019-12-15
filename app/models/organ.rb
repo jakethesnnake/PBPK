@@ -15,6 +15,18 @@ class Organ < ApplicationRecord
     c_arr
   end
 
+  # Public: takes ID list and returns all corresponding organ objects, and their children
+  #
+  # ids - list of all organ ids
+  #
+  # returns [] if empty parameter
+  def self.organs_and_children_from_id_list(ids)
+    return [] unless ids && ids.count > 0
+    organs = ids.map { |id| Organ.find_by_id(id.to_i) }
+    organs = organs_and_all_children(organs)
+    organs
+  end
+
   # Public: returns the list of organs along with its children
   def self.organs_and_all_children(organs)
     return [] unless organs && organs.try(:count) > 0
