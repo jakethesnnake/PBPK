@@ -26,6 +26,12 @@ class Animal < ApplicationRecord
     parent_id.present?
   end
 
+  # Public: returns true if animal has parent && grandparent
+  def is_grandchild?
+    return false unless parent
+    parent.is_child?
+  end
+
   # Public: returns all organ weights for animal
   def organ_weights
     Weight.where(animal_id: id)
