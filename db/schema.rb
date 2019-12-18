@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_17_011805) do
+ActiveRecord::Schema.define(version: 2019_12_18_070722) do
 
   create_table "animals", force: :cascade do |t|
     t.string "name", null: false
@@ -25,6 +25,15 @@ ActiveRecord::Schema.define(version: 2019_12_17_011805) do
 
   create_table "authors", force: :cascade do |t|
     t.string "name", null: false
+  end
+
+  create_table "hemats", force: :cascade do |t|
+    t.integer "animal_id", null: false
+    t.decimal "mean", null: false
+    t.decimal "standard_deviation", null: false
+    t.integer "sample_size", null: false
+    t.integer "number_of_studies", null: false
+    t.decimal "body_weight"
   end
 
   create_table "organs", force: :cascade do |t|

@@ -1,0 +1,2 @@
+class Hemat < ApplicationRecord
+end

@@ -21,9 +21,9 @@ animals = [
     { name: "Male Swine", id: 12, parent_id: 11 },
     { name: "Female Swine", id: 13, parent_id: 11 },
     { name: "Market-Age Swine", id: 14, parent_id: 11 },
-    { name: "Growing Swine", id: 15, parent_id: 11 },
-    { name: "Aged Swine", id: 16, parent_id: 11 },
-    { name: "Different Age Groups of Swine", id: 17, parent_id: 11 },
+    { name: "Growing Swine", id: 15, parent_id: 11 }, # (subcategory of different age)
+    { name: "Aged Swine", id: 16, parent_id: 11 }, # (subcategory of different age)
+    { name: "Different Age Groups of Swine", id: 17, parent_id: 11 }, # ??
 
     # cardiac output
     { name: "Unanesthetized Cattle", id: 18 },
@@ -31,7 +31,8 @@ animals = [
     { name: "Unanesthetized Swine", id: 20 },
 
     # adult cattle
-    { name: "Adult Cattle", id: 21 }
+    { name: "Adult Cattle", id: 21 },
+    { name: "Young Swine", id: 22, parent_id: 11 } # (subcategory of different age)
 ]
 organs = [
     { name: "Adrenals", id: 1 },
@@ -78,7 +79,12 @@ organs = [
     { name: "Skin", id: 39 },
     { name: "Cardiac Output (L/h/kg Body Weight)", id: 40 },
     { name: "Hepatic Artery", id: 41 },
-    { name: "Portal Vein", id: 42 }
+    { name: "Portal Vein", id: 42 },
+    { name: "Adrenal", id: 43 },
+    { name: "Pituitary Gland", id: 44 },
+    { name: "Loin Muscle", id: 45 },
+    { name: "Gastrocnemius Muscle", id: 46 },
+    { name: "Hematocrit (%)", id: 47 }
 ]
 weights = [
     { animal_id: 1, organ_id: 1, mean: 0.006, standard_deviation: 0.002, sample_size: 716, number_of_studies: 3, id: 1 }, # Adrenals
@@ -168,7 +174,7 @@ parameters = [
     {name: "Cardiac Output", id: 2},
     {name: "Blood Flow", id: 3},
     {name: "Vascular Space Fraction", id: 4},
-    {name: "Hematocrit", id: 5},
+    {name: "Hematocrit", id: 5}
 ]
 
 # Cardiac Output
@@ -240,3 +246,12 @@ CSV.read("lib/csv-tables/table11-with-ids.csv", :headers => true).each { |row| W
 CSV.read("lib/csv-tables/table12-with-ids.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
 CSV.read("lib/csv-tables/table13-to-17-with-ids.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
 CSV.read("lib/csv-tables/table19-with-ids.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
+CSV.read("lib/csv-tables/table21-with-ids.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
+CSV.read("lib/csv-tables/table23-with-ids.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
+CSV.read("lib/csv-tables/table24-with-ids.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
+CSV.read("lib/csv-tables/table28-with-ids.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
+CSV.read("lib/csv-tables/table29-with-ids.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
+CSV.read("lib/csv-tables/table30-with-ids.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
+CSV.read("lib/csv-tables/table32-with-ids.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
+CSV.read("lib/csv-tables/table33-with-ids.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
+CSV.read("lib/csv-tables/table34-to-37-hematocrit.csv", :headers => true).each { |row| Hemat.create!(row.to_h) }
