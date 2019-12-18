@@ -28,7 +28,10 @@ animals = [
     # cardiac output
     { name: "Unanesthetized Cattle", id: 18 },
     { name: "Unanesthetized Calves", id: 19 },
-    { name: "Unanesthetized Swine", id: 20 }
+    { name: "Unanesthetized Swine", id: 20 },
+
+    # adult cattle
+    { name: "Adult Cattle", id: 21 }
 ]
 organs = [
     { name: "Adrenals", id: 1 },
@@ -73,7 +76,9 @@ organs = [
     { name: "Stomachs", id: 37, parent_id: 6 },
     { name: "Stomach", id: 38, parent_id: 6 },
     { name: "Skin", id: 39 },
-    { name: "Cardiac Output (L/h/kg Body Weight)", id: 40 }
+    { name: "Cardiac Output (L/h/kg Body Weight)", id: 40 },
+    { name: "Hepatic Artery", id: 41 },
+    { name: "Portal Vein", id: 42 }
 ]
 weights = [
     { animal_id: 1, organ_id: 1, mean: 0.006, standard_deviation: 0.002, sample_size: 716, number_of_studies: 3, id: 1 }, # Adrenals
@@ -234,3 +239,4 @@ CSV.read("lib/csv-tables/table10-with-ids.csv", :headers => true).each { |row| W
 CSV.read("lib/csv-tables/table11-with-ids.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
 CSV.read("lib/csv-tables/table12-with-ids.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
 CSV.read("lib/csv-tables/table13-to-17-with-ids.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
+CSV.read("lib/csv-tables/table19-with-ids.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
