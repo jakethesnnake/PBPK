@@ -10,9 +10,6 @@
   -ms-user-select: none;
   user-select: none;
 }
-.row {
-    column-count: 3;
-}
 div.submit-container {
     height: 10em;
     display: flex;
@@ -29,7 +26,7 @@ div.submit-container {
 .parameters {
     max-width: 40%;
 }
-.card-body-temp {
+.card-body-weight {
     color: #2196f3;
     column-count: 3;
 }
@@ -96,4 +93,23 @@ div.indent-grandchild {
     align-items: center;
     align-content: center;
     justify-content: center;
+}
+.card.parameter {
+    display: block;
+    position: relative;
+    margin-left: 325px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+}
+.card.weight {
+    align-content: center;
+    font-size: 1.3em;
+    margin: 30px 300px 10px 300px;
 }

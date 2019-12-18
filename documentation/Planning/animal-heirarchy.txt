@@ -1,0 +1,17 @@
+Cattle
+	Beef Cattle
+		Angus
+		Hereford
+		Male only
+		Female only
+	Dairy Cows
+		Jersey
+		Holstein
+	Calves
+Swine
+	Male only
+	Female only
+	Market-age
+	Growing
+	Aged
+	Different Age Groups

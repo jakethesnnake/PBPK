@@ -4,11 +4,26 @@
 require 'csv'
 
 animals = [
+    # cattle
     { name: "Cattle", id: 1 },
     { name: "Beef Cattle", id: 2, parent_id: 1 },
     { name: "Dairy Cows", id: 3, parent_id: 1 },
     { name: "Jersey", id: 4, parent_id: 3 },
-    { name: "Holstein", id: 5, parent_id: 3 }
+    { name: "Holstein", id: 5, parent_id: 3 },
+    { name: "Angus", id: 6, parent_id: 2 },
+    { name: "Hereford", id: 7, parent_id: 2 },
+    { name: "Male Beef Cattle", id: 8, parent_id: 2 },
+    { name: "Female Beef Cattle", id: 9, parent_id: 2 },
+    { name: "Calves", id: 10, parent_id: 1 },
+
+    # swine
+    { name: "Swine", id: 11 },
+    { name: "Male Swine", id: 12, parent_id: 11 },
+    { name: "Female Swine", id: 13, parent_id: 11 },
+    { name: "Market-Age Swine", id: 14, parent_id: 11 },
+    { name: "Growing Swine", id: 15, parent_id: 11 },
+    { name: "Aged Swine", id: 16, parent_id: 11 },
+    { name: "Different Age Groups of Swine", id: 17, parent_id: 11 }
 ]
 organs = [
     { name: "Adrenals", id: 1 },
@@ -48,7 +63,11 @@ organs = [
     { name: "Mammary Gland (pregnancy)", id: 32, parent_id: 29 },
     { name: "Uterus", id: 33 },
     { name: "Ovary", id: 34 },
-    { name: "Corpora Lutea", id: 35 }
+    { name: "Corpora Lutea", id: 35 },
+    { name: "Body Weight (kg)", id: 36 },
+    { name: "Stomachs", id: 37, parent_id: 6 },
+    { name: "Stomach", id: 38, parent_id: 6 },
+    { name: "Skin", id: 39 }
 ]
 weights = [
     { animal_id: 1, organ_id: 1, mean: 0.006, standard_deviation: 0.002, sample_size: 716, number_of_studies: 3, id: 1 }, # Adrenals
@@ -63,6 +82,7 @@ weights = [
     { animal_id: 1, organ_id: 9, mean: 1.75, standard_deviation: 0.35, sample_size: 869, number_of_studies: 4, id: 9 }, # Rumen
     { animal_id: 1, organ_id: 10, mean: 0.85, standard_deviation: 0.22, sample_size: 948, number_of_studies: 6, id: 10 }, # Omasum
     { animal_id: 1, organ_id: 11, mean: 0.37, standard_deviation: 0.10, sample_size: 948, number_of_studies: 6, id: 11 }, # Abomasum
+
     { animal_id: 1, organ_id: 12, id: 12 }, # Intestines
     { animal_id: 1, organ_id: 13, mean: 1.06, standard_deviation: 0.24, sample_size: 1158, number_of_studies: 10, id: 13 }, # Small Intestine
     { animal_id: 1, organ_id: 14, mean: 0.78, standard_deviation: 0.21, sample_size: 919, number_of_studies: 8, id: 14 }, # Large Intestine
@@ -79,7 +99,6 @@ weights = [
     { animal_id: 1, organ_id: 25, mean: 0.03, standard_deviation: 0.018, sample_size: 728, number_of_studies: 3, id: 25 }, # Thymus
     { animal_id: 1, organ_id: 26, mean: 29.67, id: 26 } # Thymus
 ]
-
 references = [
     { id: 1, name: "Matthews", year: 1975 },
     { id: 2, name: "Buntyn", year: 2017 },
@@ -133,7 +152,6 @@ references = [
     { id: 47, name: "Shahin", name2: "Berg", year: 1985 },
     { id: 48, name: "Fonseca", year: 2017 }
 ]
-
 parameters = [
     {name: "Organ Weight", id: 1},
     {name: "Blood Flow", id: 2},
@@ -142,13 +160,36 @@ parameters = [
     {name: "Hematocrit", id: 5},
 ]
 
+# Cardiac Output
+  # Unanesthetized Cattle
+  # Unanesthetized Calves
+  # Unanesthetized Swine
+# Blood Flow
+  # Adult Cattle
+  # Beef Cattle
+  # Dairy Cows
+  # Calves
+  # Swine
+# Vascular Space Fraction
+  # Adult Cattle
+  # Calves
+  # Growing Swine
+  # Aged Swine
+# Hematocrit
+  # Adult Cattle
+  # Calves
+  # Swine
+  # Swine in different age groups
+
 animals.each { |animal| Animal.create!(animal) }
 organs.each { |organ| Organ.create!(organ) }
 weights.each { |weight| Weight.create!(weight) }
 references.each { |reference| Publication.insert_reference!(reference) }
 parameters.each { |parameter| Parameter.create!(parameter) }
 
-# # ADD REFERENCE NUMBERS
+(1..7).each { |i| Animal.find_by_id(i).add_to_parameter(Parameter.find_by_id(1)) }
+
+# ADD REFERENCE NUMBERS
 Weight.find_by_id(1).add_reference_number_list([1, 2, 3]) # adrenals
 Weight.find_by_id(2).add_reference_number_list([4, 5, 6, 7, 8, 9, 10, 11, 48]) # adipose tissue
 Weight.find_by_id(3).add_reference_number_list([1, 12, 13, 14, 15, 16, 17, 18, 19]) # blood
@@ -179,3 +220,10 @@ Weight.find_by_id(25).add_reference_number_list([1, 24, 26]) # thymus
 CSV.read("lib/csv-tables/table2-with-ids.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
 CSV.read("lib/csv-tables/table3-with-ids.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
 CSV.read("lib/csv-tables/table4-with-ids.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
+CSV.read("lib/csv-tables/table5-with-ids.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
+CSV.read("lib/csv-tables/table6-with-ids.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
+CSV.read("lib/csv-tables/table7-with-ids.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
+CSV.read("lib/csv-tables/table9-with-ids.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
+CSV.read("lib/csv-tables/table10-with-ids.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
+CSV.read("lib/csv-tables/table11-with-ids.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
+CSV.read("lib/csv-tables/table12-with-ids.csv", :headers => true).each { |row| Weight.create!(row.to_h) }

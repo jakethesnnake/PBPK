@@ -41,13 +41,84 @@ class Animal < ApplicationRecord
   # are included in the parameter set
   # <TEST>
   def filtered_weights(filter_organs)
-    raise Exception unless organ_weights.count > 0
     final = []
+    return final unless organ_weights.count > 0
     organ_weights.each do |weight|
       organ = Organ.find_by_id(weight.organ_id)
       final << weight if filter_organs.include?(organ)
     end
     final
+  end
+
+  # Public: returns sorted table of animals
+  #
+  # from parents -> children -> grandchildren
+  def self.sorted
+    arr = []
+    Animal.all.each do |animal|
+      next if animal.is_child?
+      arr << animal
+      animal.children.each do |a|
+        arr << a
+        next unless a.children.count > 0
+        a.children.each do |grandchild|
+          arr << grandchild
+        end
+      end
+    end
+    arr
+  end
+
+  # Public: returns sorted table of animals
+  #
+  # from parents -> children -> grandchildren
+  def self.sort_animal_list(animals, sorted_arr = Array.new)
+    return sorted_arr unless animals && animals.count > 0
+    next_parent = animals.detect { |a| a.parent_id.nil? || a.parent && !animals.include?(a.parent) }
+
+    raise Exception unless next_parent
+
+    sorted_arr << animals.delete(next_parent)
+    children = animals.select{ |c| c.parent == next_parent }
+
+    return sort_animal_list(animals, sorted_arr) if children.count == 0
+
+    children.each do |child|
+      sorted_arr << animals.delete(child)
+      grandchildren = animals.select{ |c| c.parent == child }
+      next unless grandchildren.count > 0
+      grandchildren.each do |grandchild|
+        sorted_arr << animals.delete(grandchild)
+      end
+    end
+
+    sort_animal_list(animals, sorted_arr)
+  end
+
+  # Public: returns (ordered set of) self and descendants
+  # from perspective of parent or grandparent
+  #
+  # if no children, returns self only
+  def self_and_descendants
+    arr = [self]
+    return arr unless children.count > 0
+    children.each do |child|
+      arr << child
+      next unless child.children.count > 0
+      child.children.each { |grandchild| arr << grandchild }
+    end
+    arr
+  end
+
+  # Public: finds or creates association between animal and parameter
+  def add_to_parameter(parameter)
+    raise Exception unless parameter.is_a?(Parameter)
+    ParametersAnimal.find_or_create_by!(parameter_id: parameter.id, animal_id: id)
+  end
+
+  # Public: returns children for animal
+  def children
+    Animal.where(parent_id: id)
   end
 
   private

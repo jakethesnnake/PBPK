@@ -3,7 +3,6 @@ class AnimalController < ApplicationController
 
   def index
     @animals = Animal.all
-    # redirect_to(Animal.first)
   end
 
   def filter

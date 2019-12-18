@@ -7,18 +7,18 @@
       </header>
       <div class="filter-content">
         <div class="card-body">
-          <% Animal.all.each do |animal| %>
+          <% Animal.sorted.each do |animal| %>
             <% css_class = animal_indent_class(animal) %>
             <% if css_class %>
               <div class="<%= css_class %>">
                 <div class="radio-button-btn-wrapper mr-2">
-                  <%= f.radio_button :animal_id, "#{animal.id}", checked: current_animal == animal, class: "radio-button-btn background-red" %>
+                  <%= f.radio_button :animal_id, "#{animal.id}", checked: current_animal == animal, class: "radio-button-btn-animal background-red" %>
                   <%= label_tag :animal_id, animal.name, class: "radio-button-btn-label white" %>
                 </div>
               </div>
             <% else %>
               <div class="radio-button-btn-wrapper mr-2">
-                <%= f.radio_button :animal_id, "#{animal.id}", checked: current_animal == animal, class: "radio-button-btn background-red" %>
+                <%= f.radio_button :animal_id, "#{animal.id}", checked: current_animal == animal, class: "radio-button-btn-animal background-red" %>
                 <%= label_tag :animal_id, animal.name, class: "radio-button-btn-label white" %>
               </div>
             <% end %>
@@ -27,5 +27,5 @@
       </div>
     </article>
   </div>
-  <%= f.submit '', class: 'd-none', id: 'submitMyForm' %>
+  <%= f.submit '', class: 'd-none', id: 'submitMyForm-animal' %>
 <% end %>
