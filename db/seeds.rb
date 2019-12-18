@@ -23,7 +23,12 @@ animals = [
     { name: "Market-Age Swine", id: 14, parent_id: 11 },
     { name: "Growing Swine", id: 15, parent_id: 11 },
     { name: "Aged Swine", id: 16, parent_id: 11 },
-    { name: "Different Age Groups of Swine", id: 17, parent_id: 11 }
+    { name: "Different Age Groups of Swine", id: 17, parent_id: 11 },
+
+    # cardiac output
+    { name: "Unanesthetized Cattle", id: 18 },
+    { name: "Unanesthetized Calves", id: 19 },
+    { name: "Unanesthetized Swine", id: 20 }
 ]
 organs = [
     { name: "Adrenals", id: 1 },
@@ -67,7 +72,8 @@ organs = [
     { name: "Body Weight (kg)", id: 36 },
     { name: "Stomachs", id: 37, parent_id: 6 },
     { name: "Stomach", id: 38, parent_id: 6 },
-    { name: "Skin", id: 39 }
+    { name: "Skin", id: 39 },
+    { name: "Cardiac Output (L/h/kg Body Weight)", id: 40 }
 ]
 weights = [
     { animal_id: 1, organ_id: 1, mean: 0.006, standard_deviation: 0.002, sample_size: 716, number_of_studies: 3, id: 1 }, # Adrenals
@@ -154,8 +160,8 @@ references = [
 ]
 parameters = [
     {name: "Organ Weight", id: 1},
-    {name: "Blood Flow", id: 2},
-    {name: "Cardiac Output", id: 3},
+    {name: "Cardiac Output", id: 2},
+    {name: "Blood Flow", id: 3},
     {name: "Vascular Space Fraction", id: 4},
     {name: "Hematocrit", id: 5},
 ]
@@ -227,3 +233,4 @@ CSV.read("lib/csv-tables/table9-with-ids.csv", :headers => true).each { |row| We
 CSV.read("lib/csv-tables/table10-with-ids.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
 CSV.read("lib/csv-tables/table11-with-ids.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
 CSV.read("lib/csv-tables/table12-with-ids.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
+CSV.read("lib/csv-tables/table13-to-17-with-ids.csv", :headers => true).each { |row| Weight.create!(row.to_h) }

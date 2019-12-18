@@ -3,6 +3,35 @@ require 'rails_helper'
 RSpec.describe Animal, type: :model do
   let!(:animal) { FactoryBot.create(:animal) }
 
+  describe '#weights_for_parameter' do
+    subject { animal.weights_for_parameter(parameter) }
+
+    let(:parameter) { p1 }
+
+    let!(:p1) { FactoryBot.create(:parameter) }
+    let!(:p2) { FactoryBot.create(:parameter) }
+
+    context 'when none exist' do
+      it { is_expected.to eq([]) }
+    end
+
+    context 'when one exists' do
+      let!(:w1) { FactoryBot.create(:weight, parameter_id: p1.id, animal_id: animal.id) }
+      let!(:w2) { FactoryBot.create(:weight, parameter_id: p2.id, animal_id: animal.id) }
+
+      it { is_expected.to include(w1) }
+      it { is_expected.not_to include(w2) }
+    end
+
+    context 'when two exist' do
+      let!(:w1) { FactoryBot.create(:weight, parameter_id: p1.id, animal_id: animal.id) }
+      let!(:w2) { FactoryBot.create(:weight, parameter_id: p1.id, animal_id: animal.id) }
+
+      it { is_expected.to include(w1) }
+      it { is_expected.to include(w2) }
+    end
+  end
+
   describe '#add_to_parameter' do
     subject { animal.add_to_parameter(parameter) }
 

@@ -63,6 +63,8 @@ ActiveRecord::Schema.define(version: 2019_12_17_011805) do
     t.integer "number_of_studies"
     t.string "reference_string"
     t.string "t_test"
+    t.integer "parameter_id", default: 1
+    t.index ["parameter_id"], name: "index_weights_on_parameter_id"
   end
 
 end

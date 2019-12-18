@@ -7,5 +7,6 @@ FactoryBot.define do
     sample_size { 45 }
     number_of_studies { 3 }
     reference_string { nil }
+    parameter_id { create(:parameter).id }
   end
 end

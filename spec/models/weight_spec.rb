@@ -10,6 +10,22 @@ RSpec.describe Weight, type: :model do
     it { expect(weight.animal).to eq(animal) }
   end
 
+  describe '.parameter_id' do
+    subject { FactoryBot.build(:weight, parameter_id: pid) }
+
+    context 'when nil' do
+      let(:pid) { nil }
+
+      it { is_expected.to be_valid }
+    end
+
+    context 'when valid' do
+      let!(:pid) { FactoryBot.create(:parameter).id }
+
+      it { is_expected.to be_valid }
+    end
+  end
+
   describe '#organ_name' do
     let!(:organ) { FactoryBot.create(:organ) }
     let!(:weight) { FactoryBot.create(:weight, organ_id: organ.id) }

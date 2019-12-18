@@ -121,6 +121,12 @@ class Animal < ApplicationRecord
     Animal.where(parent_id: id)
   end
 
+  # Public: returns all weights associated with a given parameter
+  def weights_for_parameter(parameter)
+    return unless parameter.is_a?(Parameter)
+    Weight.where(animal_id: id, parameter_id: parameter.id)
+  end
+
   private
     # Private: ensures parent_id is nil or valid
     def valid_or_nil_parent
