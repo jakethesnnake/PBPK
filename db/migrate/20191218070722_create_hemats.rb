@@ -1,7 +1,8 @@
 class CreateHemats < ActiveRecord::Migration[5.2]
   def change
+    # Hematocrit table
     create_table :hemats do |t|
-      t.integer :animal_id, null: false
+      t.integer :animal_id, null: false, index: true
       t.decimal :mean, null: false
       t.decimal :standard_deviation, null: false
       t.integer :sample_size, null: false

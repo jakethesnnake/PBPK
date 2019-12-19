@@ -26,13 +26,13 @@ RSpec.describe HomeController, type: :controller do
     context 'when animal id nil' do
       let(:animal_id) { nil }
 
-      it { subject ; expect(controller.instance_variable_get(:@animal)).to eq(Animal.first) }
+      it { is_expected.to redirect_to(root_url) }
     end
 
     context 'when parameter id nil' do
       let(:parameter_id) { nil }
 
-      it { subject ; expect(controller.instance_variable_get(:@parameter)).to eq(Parameter.first) }
+      it { is_expected.to redirect_to(root_url) }
     end
   end
 end

@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 2019_12_18_070722) do
     t.integer "sample_size", null: false
     t.integer "number_of_studies", null: false
     t.decimal "body_weight"
+    t.index ["animal_id"], name: "index_hemats_on_animal_id"
   end
 
   create_table "organs", force: :cascade do |t|
