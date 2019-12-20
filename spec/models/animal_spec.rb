@@ -3,6 +3,150 @@ require 'rails_helper'
 RSpec.describe Animal, type: :model do
   let!(:animal) { FactoryBot.create(:animal) }
 
+  let!(:p1) { FactoryBot.create(:parameter, id: 1) }
+  let!(:p2) { FactoryBot.create(:parameter, id: 2) }
+
+  describe '#organs_for_parameter' do
+    subject { animal.organs_for_parameter(parameter) }
+    let(:parameter) { p1 }
+
+    context 'when none' do
+      it { is_expected.to eq([]) }
+    end
+
+    context 'when invalid parameter' do
+      let(:parameter) { nil }
+
+      it { is_expected.to be_nil }
+    end
+
+    context 'when one' do
+      let!(:o1) { FactoryBot.create(:organ) }
+      let!(:w1) { FactoryBot.create(:weight, organ_id: o1.id, animal_id: animal.id, parameter_id: p1.id) }
+
+      it { is_expected.to eq([o1]) }
+    end
+
+    context 'when one (but one for different param)' do
+      let!(:o1) { FactoryBot.create(:organ) }
+      let!(:o2) { FactoryBot.create(:organ) }
+      let!(:w1) { FactoryBot.create(:weight, organ_id: o1.id, animal_id: animal.id, parameter_id: p1.id) }
+      let!(:w2) { FactoryBot.create(:weight, organ_id: o2.id, animal_id: animal.id, parameter_id: p2.id) }
+
+      it { is_expected.to eq([o1]) }
+    end
+
+    context 'when two' do
+      let!(:o1) { FactoryBot.create(:organ) }
+      let!(:o2) { FactoryBot.create(:organ) }
+      let!(:w1) { FactoryBot.create(:weight, organ_id: o1.id, animal_id: animal.id, parameter_id: p1.id) }
+      let!(:w2) { FactoryBot.create(:weight, organ_id: o2.id, animal_id: animal.id, parameter_id: p1.id) }
+
+      it { is_expected.to eq([o1, o2]) }
+    end
+  end
+
+  describe '#parameters' do
+    subject { params }
+    let(:params) { animal.parameters }
+
+    context 'when none' do
+      it { expect(params).to eq([]) }
+    end
+
+    context 'when one' do
+      let!(:o1) { FactoryBot.create(:organ) }
+      let!(:w1) { FactoryBot.create(:weight, organ_id: o1.id, animal_id: animal.id, parameter_id: 1) }
+
+      it { expect(params).to eq([p1]) }
+    end
+
+    context 'when two' do
+      let!(:o1) { FactoryBot.create(:organ) }
+      let!(:w1) { FactoryBot.create(:weight, organ_id: o1.id, animal_id: animal.id, parameter_id: 1) }
+      let!(:w2) { FactoryBot.create(:weight, organ_id: o1.id, animal_id: animal.id, parameter_id: 2) }
+
+      it { expect(params).to eq([p1, p2]) }
+    end
+
+    context 'when id 5 only' do
+      let!(:p5) { FactoryBot.create(:parameter, id: 5) }
+      let!(:h1) { FactoryBot.create(:hemat, animal_id: animal.id) }
+
+      it { expect(params).to eq([p5]) }
+    end
+  end
+
+  describe '#hemat_data' do
+    subject { animal.hemat_data }
+
+    context 'when data' do
+      let!(:h1) { FactoryBot.create(:hemat, animal_id: animal.id) }
+
+      it { is_expected.to include(h1) }
+    end
+
+    context 'when no data' do
+      it { is_expected.to eq([]) }
+    end
+  end
+
+  describe '#has_parameter_data?' do
+    subject { animal.has_parameter_data?(parameter) }
+    let(:parameter) { p1 }
+
+    context 'when no data present' do
+      it { is_expected.to be_falsey }
+    end
+
+    context 'when data for p1' do
+      let!(:o1) { FactoryBot.create(:organ) }
+      let!(:w1) { FactoryBot.create(:weight, organ_id: o1.id, animal_id: animal.id, parameter_id: 1) }
+
+      context 'when p1 is param' do
+        it { is_expected.to be_truthy }
+      end
+
+      context 'when p2 is param' do
+        let(:parameter) { p2 }
+
+        it { is_expected.to be_falsey }
+      end
+    end
+
+    context 'when data for p2' do
+      let!(:o1) { FactoryBot.create(:organ) }
+      let!(:w1) { FactoryBot.create(:weight, organ_id: o1.id, animal_id: animal.id, parameter_id: 2) }
+
+
+      context 'when p1 is param' do
+        it { is_expected.to be_falsey }
+      end
+
+      context 'when p2 is param' do
+        let(:parameter) { p2 }
+
+        it { is_expected.to be_truthy }
+      end
+    end
+
+    context 'when data for p5' do
+      let!(:o1) { FactoryBot.create(:organ) }
+      let!(:h1) { FactoryBot.create(:hemat, animal_id: animal.id) }
+
+
+      context 'when p1 is param' do
+        it { is_expected.to be_falsey }
+      end
+
+      context 'when p5 is param' do
+        let(:parameter) { FactoryBot.create(:parameter, id: 5) }
+
+        it { is_expected.to be_truthy }
+      end
+    end
+  end
+
   describe '#weights_for_parameter' do
     subject { animal.weights_for_parameter(parameter) }
 
@@ -29,32 +173,6 @@ RSpec.describe Animal, type: :model do
 
       it { is_expected.to include(w1) }
       it { is_expected.to include(w2) }
-    end
-  end
-
-  describe '#add_to_parameter' do
-    subject { animal.add_to_parameter(parameter) }
-
-    context 'when nil' do
-      let(:parameter) { nil }
-
-      it { expect { subject }.to raise_error }
-    end
-
-    context 'when valid (create)' do
-      let(:parameter) { FactoryBot.create(:parameter) }
-
-      it { subject ; expect(ParametersAnimal.find_by(parameter_id: parameter.id, animal_id: animal.id)).not_to be(nil) }
-    end
-
-    context 'when valid (find)' do
-      let(:parameter) { param }
-      let!(:param) { FactoryBot.create(:parameter) }
-
-      before { subject }
-
-      it { expect(ParametersAnimal.find_by(parameter_id: param.id, animal_id: animal.id)).not_to be(nil) }
-      it { expect(ParametersAnimal.count).to eq(1) }
     end
   end
 

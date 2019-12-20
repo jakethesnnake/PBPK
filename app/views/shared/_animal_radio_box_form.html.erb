@@ -1,13 +1,14 @@
-<!--locals: { current_animal }-->
-<%= form_with(local: true, remote: false, url: home_filter_path) do |f| %>
+<!--locals: { current_animal, animals, parameter }-->
+<%= form_with(local: true, remote: false, url: home_set_animal_path) do |f| %>
+  <%= f.hidden_field :parameter_id, :value => parameter.try(:id) %>
   <div class="card animal">
     <article class="card-group-item">
       <header class="card-header">
         <h6 class="title">Animal</h6>
       </header>
       <div class="filter-content">
-        <div class="card-body">
-          <% Animal.sorted.each do |animal| %>
+        <div class="card-body-animal">
+          <% animals.each do |animal| %>
             <% css_class = animal_indent_class(animal) %>
             <% if css_class %>
               <div class="<%= css_class %>">

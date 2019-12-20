@@ -1,0 +1,38 @@
+<!--locals: { animal, parameter }-->
+<% if animal && parameter %>
+  <%= form_with(local: true, remote: false, url: { action: "filter" }) do |form| %>
+    <%= form.hidden_field :animal_id, :value => animal.try(:id) %>
+    <%= form.hidden_field :parameter_id, :value => parameter.try(:id) %>
+    <div class="card weight">
+      <article class="card-group-item">
+        <header class="card-header">
+          <h6 class="title">Organs</h6>
+          <% if animal && parameter %>
+            <%= link_to "Select All", home_filter_path(animal_id: animal.id, parameter_id: parameter.id), class: 'btn btn-primary' %>
+            <%= link_to "Unselect All", home_empty_path(animal_id: animal.id, parameter_id: parameter.id), class: 'btn btn-primary' %>
+          <% end %>
+        </header>
+        <div class="filter-content">
+          <div class="card-body-weight">
+            <% organs_from_animal_and_parameter(animal, parameter).each do |organ| %>
+                <% css_class = organ_indent_class(organ) %>
+                <% if css_class %>
+                  <div class="<%= css_class %>">
+                    <%= render :partial => 'shared/organ_checkbox', locals: { organ: organ } %>
+                  </div>
+                <% else %>
+                  <%= render :partial => 'shared/organ_checkbox', locals: { organ: organ } %>
+                <% end %>
+              <% end %>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <div class="submit-container">
+      <div class="actions">
+        <%= form.submit "Filter", class: 'btn btn-primary' %>
+      </div>
+    </div>
+  <% end %>
+<% end %>

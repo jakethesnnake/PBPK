@@ -1,0 +1,11 @@
+animal_id,organ_id,mean,standard_deviation
+,Adrenal Glands,3,0.2
+,Heart,2.6,0.4
+,Kidneys,3.7,0.3
+,Liver,7.9,2.5
+,Lungs,25.1,1.8
+,Muscle,*,*
+,Pancreas,2.5,0.5
+,Pituitary Gland,3.4,0.7
+,Spleen,31.3,1.7
+,,,

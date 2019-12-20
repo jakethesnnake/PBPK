@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_17_011805) do
+ActiveRecord::Schema.define(version: 2019_12_18_070722) do
 
   create_table "animals", force: :cascade do |t|
     t.string "name", null: false
@@ -27,6 +27,16 @@ ActiveRecord::Schema.define(version: 2019_12_17_011805) do
     t.string "name", null: false
   end
 
+  create_table "hemats", force: :cascade do |t|
+    t.integer "animal_id", null: false
+    t.decimal "mean", null: false
+    t.decimal "standard_deviation", null: false
+    t.integer "sample_size", null: false
+    t.integer "number_of_studies", null: false
+    t.decimal "body_weight"
+    t.index ["animal_id"], name: "index_hemats_on_animal_id"
+  end
+
   create_table "organs", force: :cascade do |t|
     t.string "name", null: false
     t.integer "parent_id"
@@ -34,13 +44,6 @@ ActiveRecord::Schema.define(version: 2019_12_17_011805) do
 
   create_table "parameters", force: :cascade do |t|
     t.string "name"
-  end
-
-  create_table "parameters_animals", force: :cascade do |t|
-    t.integer "parameter_id", null: false
-    t.integer "animal_id", null: false
-    t.index ["animal_id"], name: "index_parameters_animals_on_animal_id"
-    t.index ["parameter_id"], name: "index_parameters_animals_on_parameter_id"
   end
 
   create_table "publications", force: :cascade do |t|

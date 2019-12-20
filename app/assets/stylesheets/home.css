@@ -1,20 +1,24 @@
+:root {
+  --filter-bg-color: antiquewhite;
+  --default-side-margin: 300px;
+  --default-font-size: 22px;
+}
 .container {
   display: block;
   position: relative;
   padding-left: 35px;
-  margin-bottom: 12px;
   cursor: pointer;
-  font-size: 22px;
+  font-size: var(--default-font-size);
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
 }
 div.submit-container {
-    height: 10em;
-    display: flex;
-    align-items: center;
-    justify-content: center
+  height: 10em;
+  display: flex;
+  align-items: center;
+  justify-content: center
 }
 .container input {
   position: absolute;
@@ -24,11 +28,21 @@ div.submit-container {
   width: 0;
 }
 .parameters {
-    max-width: 40%;
+  max-width: 40%;
 }
 .card-body-weight {
-    color: #2196f3;
-    column-count: 3;
+  color: #2196f3;
+  column-count: 3;
+  background-color: var(--filter-bg-color);
+}
+.card-body-animal {
+  color: #2196f3;
+  background-color: var(--filter-bg-color);
+  column-count: 2;
+}
+.card-body-parameter {
+  color: #2196f3;
+  background-color: var(--filter-bg-color);
 }
 .checkmark {
   position: absolute;
@@ -81,35 +95,38 @@ div.indent-grandchild {
   text-indent: 50px;
 }
 .card.animal {
-    display: block;
-    position: relative;
-    margin-left: 325px;
-    cursor: pointer;
-    font-size: 22px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    align-items: center;
-    align-content: center;
-    justify-content: center;
+  display: block;
+  position: relative;
+  margin-left: var(--default-side-margin);
+  cursor: pointer;
+  font-size: var(--default-font-size);
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  max-width: 800px;
 }
 .card.parameter {
-    display: block;
-    position: relative;
-    margin-left: 325px;
-    cursor: pointer;
-    font-size: 22px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    align-items: center;
-    align-content: center;
-    justify-content: center;
+  display: block;
+  position: relative;
+  margin-left: 100px;
+  margin-top: 100px;
+  cursor: pointer;
+  font-size: var(--default-font-size);
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
 }
 .card.weight {
-    align-content: center;
-    font-size: 1.3em;
-    margin: 30px 300px 10px 300px;
+  align-content: center;
+  font-size: var(--default-font-size);
+  max-width: 1200px;
+  margin: 30px 300px 10px var(--default-side-margin); /* top right bottom left */
 }
