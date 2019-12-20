@@ -7,6 +7,7 @@ class Weight < ApplicationRecord
   validates :sample_size, numericality: true, allow_blank: true
   validates :number_of_studies, numericality: true, allow_blank: true
 
+  before_validation :set_defaults
   after_create :add_list
 
   # <TEMP>
@@ -66,4 +67,10 @@ class Weight < ApplicationRecord
     end
     nums
   end
+
+  private
+    # Private: sets default values
+    def set_defaults
+      self.parameter_id ||= 1
+    end
 end

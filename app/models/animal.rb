@@ -4,6 +4,13 @@ class Animal < ApplicationRecord
 
   validate :valid_or_nil_parent
 
+  # Public: returns parameters that animal has data for
+  #
+  # returns [] unless data exists
+  def parameters
+    Parameter.all.select { |p| has_parameter_data?(p) }
+  end
+
   # Public: returns animal parent or nil otherwise
   def parent
     Animal.find_by_id(parent_id)
@@ -40,10 +47,11 @@ class Animal < ApplicationRecord
   # Public: returns all organ weights that correspond to the animal AND
   # are included in the parameter set
   # <TEST>
-  def filtered_weights(filter_organs)
+  def filtered_weights(filter_organs, parameter)
     final = []
-    return final unless organ_weights.count > 0
-    organ_weights.each do |weight|
+    return final unless parameter.is_a?(Parameter) && filter_organs &&
+        filter_organs.count > 0 && weights_for_parameter(parameter).count > 0
+    weights_for_parameter(parameter).each do |weight|
       organ = Organ.find_by_id(weight.organ_id)
       final << weight if filter_organs.include?(organ)
     end
@@ -110,15 +118,40 @@ class Animal < ApplicationRecord
     arr
   end
 
-  # Public: finds or creates association between animal and parameter
-  def add_to_parameter(parameter)
-    raise Exception unless parameter.is_a?(Parameter)
-    ParametersAnimal.find_or_create_by!(parameter_id: parameter.id, animal_id: id)
-  end
-
   # Public: returns children for animal
   def children
     Animal.where(parent_id: id)
+  end
+
+  # Public: returns all weights associated with a given parameter
+  def weights_for_parameter(parameter)
+    return unless parameter.is_a?(Parameter)
+    Weight.where(animal_id: id, parameter_id: parameter.id)
+  end
+
+  # Public: returns all organs associated with a given parameter
+  #
+  # returns [] if none present or if parameter invalid
+  def organs_for_parameter(parameter)
+    return unless parameter.is_a?(Parameter)
+    Weight.where(animal_id: id, parameter_id: parameter.id).map { |weight| Organ.find_by_id(weight.organ_id) }
+  end
+
+  # Public: returns all hemat data for animal, if it exists
+  #
+  # returns [] otherwise
+  def hemat_data
+    Hemat.where(animal_id: id)
+  end
+
+  # Public: returns true if the animal has data for a given parameter
+  #
+  # returns false otherwise
+  def has_parameter_data?(parameter)
+    return unless parameter.is_a?(Parameter)
+    weights = weights_for_parameter(parameter)
+    return true if weights.count > 0
+    hemat_data.count > 0 && parameter.id == 5
   end
 
   private

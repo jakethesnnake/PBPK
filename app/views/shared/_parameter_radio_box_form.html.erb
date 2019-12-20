@@ -1,16 +1,16 @@
-<!--locals: { current_parameter }-->
+<!--locals: { current_parameter, animal, parameters }-->
 <%= form_with(local: true, remote: false, url: set_parameter_path) do |f| %>
+  <%= f.hidden_field :animal_id, :value => animal.try(:id) %>
   <div class="card parameter">
     <article class="card-group-item">
       <header class="card-header">
         <h6 class="title">Parameter</h6>
       </header>
       <div class="filter-content">
-        <div class="card-body">
-          <% Parameter.all.each do |parameter| %>
+        <div class="card-body-parameter">
+          <% parameters.each do |parameter| %>
             <div class="radio-button-btn-wrapper mr-2">
               <%= f.radio_button :parameter_id, "#{parameter.id}", checked: current_parameter == parameter, class: "radio-button-btn-param background-red" %>
-              <%= f.hidden_field :animal_id, :value => @animal.id %>
               <%= label_tag :parameter_id, parameter.name, class: "radio-button-btn-label white" %>
             </div>
           <% end %>
