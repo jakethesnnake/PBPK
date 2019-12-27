@@ -21,18 +21,12 @@ animals = [
     { name: "Male Swine", id: 12, parent_id: 11 },
     { name: "Female Swine", id: 13, parent_id: 11 },
     { name: "Market-Age Swine", id: 14, parent_id: 11 },
-    { name: "Growing Swine", id: 15, parent_id: 11 }, # (subcategory of different age)
-    { name: "Aged Swine", id: 16, parent_id: 11 }, # (subcategory of different age)
-    { name: "Different Age Groups of Swine", id: 17, parent_id: 11 }, # ??
-
-    # cardiac output
-    { name: "Unanesthetized Cattle", id: 18 },
-    { name: "Unanesthetized Calves", id: 19 },
-    { name: "Unanesthetized Swine", id: 20 },
+    { name: "Growing Swine", id: 15, parent_id: 11 },
+    { name: "Aged Swine", id: 16, parent_id: 11 },
+    { name: "Different Age Groups of Swine", id: 17, parent_id: 11 },
 
     # adult cattle
-    { name: "Adult Cattle", id: 21 },
-    { name: "Young Swine", id: 22, parent_id: 11 } # (subcategory of different age)
+    { name: "Adult Cattle", id: 21, parent_id: 1 }
 ]
 organs = [
     { name: "Adrenals", id: 1 },

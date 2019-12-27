@@ -10,6 +10,7 @@ class CreateHemats < ActiveRecord::Migration[5.2]
 
       # optional
       t.decimal :body_weight, null: true
+      t.string :age, null: true
     end
   end
 end
