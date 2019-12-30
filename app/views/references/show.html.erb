@@ -1,0 +1,16 @@
+<h1>References for</h1>
+
+<p class="weight-info">
+  Animal: <%= @weight.animal_name %>
+</p>
+
+<!--MODIFY THIS FOR HEMAT-->
+<p class="weight-info">
+  Organ: <%= @weight.organ_name %>
+</p>
+
+<% if @publications.count > 0 %>
+  <% @publications.each do |publication| %>
+    <%= mini_citation_hyperlink(publication) %><br>
+  <% end %>
+<% end %>

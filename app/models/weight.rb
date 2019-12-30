@@ -31,6 +31,10 @@ class Weight < ApplicationRecord
     Organ.find_by_id(organ_id).name
   end
 
+  def animal_name
+    Animal.find_by_id(animal_id).name
+  end
+
   # <TEST>
   def add_reference_number_list(num_list)
     raise Exception unless num_list.count > 0

@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
   root 'home#index'
 
+  # references
+  get 'references/show', to: 'references#show', as: 'show_references'
+  get 'references/full_individual', to: 'references#full_individual', as: 'full_individual'
+
+  # home
   get 'home/set_animal'
   get 'home/set_parameter'
   get 'home/filter'

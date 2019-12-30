@@ -4,9 +4,14 @@ class Publication < ApplicationRecord
   def authors
     sets = AuthorPublication.where(publication_id: id)
     auth_arr = []
-    return [] unless sets.count > 0
+    return auth_arr unless sets.count > 0
     sets.each { |set| auth_arr << Author.find_by_id(set.author_id) }
     auth_arr
+  end
+
+  # <TEST>
+  def mini_citation
+    "#{authors.first.name} #{year}"
   end
 
   # <TEST>

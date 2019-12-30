@@ -1,6 +1,11 @@
 class Author < ApplicationRecord
   validates :name, presence: true
 
+  # <NOT IMPLEMENTED>
+  def add_publication
+    raise Exception
+  end
+
   def publications
     sets = AuthorPublication.where(author_id: id)
     pubs = []

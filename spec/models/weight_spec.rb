@@ -35,6 +35,15 @@ RSpec.describe Weight, type: :model do
     it { is_expected.to eq(organ.name) }
   end
 
+  describe '#animal_name' do
+    let!(:organ) { FactoryBot.create(:organ) }
+    let!(:weight) { FactoryBot.create(:weight, organ_id: organ.id) }
+
+    subject { weight.animal_name }
+
+    it { is_expected.to eq(weight.animal.name) }
+  end
+
   describe '#add_publication && #publications' do
     let!(:weight) { FactoryBot.create(:weight) }
     let!(:p1) { FactoryBot.create(:publication) }
