@@ -1,7 +1,7 @@
-animal_id,body_weight,mean,standard_deviation,sample_size,number_of_studies
-21,,37.8,3.3,230,6
-10,,33.7,4.6,81,7
-11,56.3,41.2,5,684,10
-22,17.6,39.9,5.4,315,7
-15,65.6,40.1,6.4,113,2
-16,95.2,43.3,3.7,256,4
+animal_id,body_weight,mean,standard_deviation,sample_size,number_of_studies,age
+21,,37.8,3.3,230,6,
+10,,33.7,4.6,81,7,
+11,56.3,41.2,5,684,10,
+17,17.6,39.9,5.4,315,7,Young
+17,65.6,40.1,6.4,113,2,Growing
+17,95.2,43.3,3.7,256,4,Finishing

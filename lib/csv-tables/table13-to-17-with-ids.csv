@@ -1,4 +1,4 @@
 animal_id,organ_id,mean,standard_deviation,sample_size,number_of_studies,parameter_id
-18,40,5.45,1.47,48,6,2
-19,40,9.09,2.77,220,11,2
-20,40,8.7,1.62,83,7,2
+21,40,5.45,1.47,48,6,2
+10,40,9.09,2.77,220,11,2
+11,40,8.7,1.62,83,7,2

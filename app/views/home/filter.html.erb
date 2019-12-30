@@ -2,6 +2,11 @@
 <html>
   <body>
     <%= render partial: 'filters' %>
-    <%= render partial: 'table', locals: { animal: @animal, parameter: @parameter } %>
+
+    <% if @parameter.try(:id) == 5 %>
+      <%= render partial: 'hemat_table', locals: { animal: @animal } %>
+    <% else %>
+      <%= render partial: 'table', locals: { animal: @animal, parameter: @parameter } %>
+    <% end %>
   </body>
 </html>

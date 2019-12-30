@@ -21,11 +21,9 @@ class Weight < ApplicationRecord
 
   def publications
     sets = WeightPublication.where(weight_id: id)
-    return [] unless sets.count > 0
     pubs = []
-    sets.each do |set|
-      pubs << Publication.find_by_id(set.publication_id)
-    end
+    return pubs unless sets.count > 0
+    sets.each { |set| pubs << Publication.find_by_id(set.publication_id) }
     pubs
   end
 
@@ -45,8 +43,8 @@ class Weight < ApplicationRecord
 
   # <TEST>
   def all_reference_numbers
-    return [] unless publications.count > 0
     nums = []
+    return nums unless publications.count > 0
     publications.each { |publication| nums << publication.reference_number }
     nums
   end
@@ -58,13 +56,9 @@ class Weight < ApplicationRecord
 
   def get_reference_link_list
     weight_pubs = WeightPublication.where(weight_id: id)
-    return [] unless weight_pubs.count > 0
     nums = []
-    weight_pubs.each do |weight_pub|
-      pub = Publication.find_by_id(weight_pub.publication_id)
-      ref_num = pub.reference_number
-      nums << ref_num
-    end
+    return nums unless weight_pubs.count > 0
+    weight_pubs.each { |weight_pub| nums << Publication.find_by_id(weight_pub.publication_id).reference_number }
     nums
   end
 

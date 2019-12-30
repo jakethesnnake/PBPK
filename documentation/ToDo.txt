@@ -1,8 +1,6 @@
-- UNSELECT ALL function
-- Heirarchy of Organ Categories
-- JS auto-updates
-
+- REFERENCE LIST
 
 Other
-- Delete 'test' folder
-- AuthorPublications back to AuthorsPublications
+- delete 'test' folder
+- card containers (better arrangement)
+	- Swine column and Cattle column

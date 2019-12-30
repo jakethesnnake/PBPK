@@ -10,17 +10,17 @@ class HomeController < ApplicationController
 
   def set_parameter
     @parameter = Parameter.find_by_id(params[:parameter_id])
-    return redirect_to(root_url) unless @parameter.is_a?(Parameter)
+
+    return redirect_to(root_url) unless @parameter
+
     @animal = Animal.find_by_id(params[:animal_id])
     if @animal
-      raise 'not implemented' if @parameter.id == 5
       @parameters = @animal.parameters
-      @organs = @animal.organs_for_parameter(@parameter)
+      @organs = @animal.organs_for_parameter(@parameter) unless @parameter.id == 5
     else
       @animals = @parameter.animal_list
       @organs = nil
     end
-    #redirect_to(hemat_data_path(@animal)) if @parameter.id == 5
     redirect_to(root_url) unless @parameters && @animals
   end
 
@@ -37,7 +37,9 @@ class HomeController < ApplicationController
   def empty
     @animal = Animal.find_by_id(params[:animal_id])
     @parameter = Parameter.find_by_id(params[:parameter_id])
+
     return redirect_to(root_url) unless @animal && @parameter
+
     @organs = []
   end
   

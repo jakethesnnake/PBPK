@@ -3,8 +3,13 @@
 
 require 'csv'
 
+require_relative 'setup_blocks/first_reference_set.rb'
+require_relative 'setup_blocks/read_csv_tables.rb'
+
+include FirstReferenceSet
+include ReadCsvTables
+
 animals = [
-    # cattle
     { name: "Cattle", id: 1 },
     { name: "Beef Cattle", id: 2, parent_id: 1 },
     { name: "Dairy Cows", id: 3, parent_id: 1 },
@@ -15,24 +20,14 @@ animals = [
     { name: "Male Beef Cattle", id: 8, parent_id: 2 },
     { name: "Female Beef Cattle", id: 9, parent_id: 2 },
     { name: "Calves", id: 10, parent_id: 1 },
-
-    # swine
     { name: "Swine", id: 11 },
     { name: "Male Swine", id: 12, parent_id: 11 },
     { name: "Female Swine", id: 13, parent_id: 11 },
     { name: "Market-Age Swine", id: 14, parent_id: 11 },
-    { name: "Growing Swine", id: 15, parent_id: 11 }, # (subcategory of different age)
-    { name: "Aged Swine", id: 16, parent_id: 11 }, # (subcategory of different age)
-    { name: "Different Age Groups of Swine", id: 17, parent_id: 11 }, # ??
-
-    # cardiac output
-    { name: "Unanesthetized Cattle", id: 18 },
-    { name: "Unanesthetized Calves", id: 19 },
-    { name: "Unanesthetized Swine", id: 20 },
-
-    # adult cattle
-    { name: "Adult Cattle", id: 21 },
-    { name: "Young Swine", id: 22, parent_id: 11 } # (subcategory of different age)
+    { name: "Growing Swine", id: 15, parent_id: 11 },
+    { name: "Aged Swine", id: 16, parent_id: 11 },
+    { name: "Different Age Groups of Swine", id: 17, parent_id: 11 },
+    { name: "Adult Cattle", id: 21, parent_id: 1 }
 ]
 organs = [
     { name: "Adrenals", id: 1 },
@@ -40,20 +35,17 @@ organs = [
     { name: "Blood", id: 3 },
     { name: "Bone", id: 4 },
     { name: "Brain", id: 5 },
-
     { name: "GI Tract", id: 6 },
     { name: "Reticulorumen", id: 7, parent_id: 6 },
     { name: "Reticulum", id: 8, parent_id: 7 },
     { name: "Rumen", id: 9, parent_id: 7 },
     { name: "Omasum", id: 10, parent_id: 6 },
     { name: "Abomasum", id: 11, parent_id: 6 },
-
     { name: "Intestines", id: 12 },
     { name: "Small Intestine", id: 13, parent_id: 12 },
     { name: "Large Intestine", id: 14, parent_id: 12 },
     { name: "Caecum", id: 15, parent_id: 14 },
     { name: "Colon", id: 16, parent_id: 14 },
-
     { name: "Heart", id: 17 },
     { name: "Kidneys", id: 18 },
     { name: "Liver", id: 19 },
@@ -92,14 +84,12 @@ weights = [
     { animal_id: 1, organ_id: 3, mean: 4.31, standard_deviation: 0.87, sample_size: 893, number_of_studies: 9, id: 3 }, # Blood
     { animal_id: 1, organ_id: 4, mean: 8.66, standard_deviation: 1.49, sample_size: 40, number_of_studies: 2, id: 4 }, # Bone
     { animal_id: 1, organ_id: 5, mean: 0.08, standard_deviation: 0.01, sample_size: 812, number_of_studies: 2, id: 5 }, # Brain
-
     { animal_id: 1, organ_id: 6, mean: 5.98, standard_deviation: 1.28, sample_size: 107, number_of_studies: 6, id: 6 }, # GI Tract
     { animal_id: 1, organ_id: 7, mean: 1.76, standard_deviation: 0.45, sample_size: 339, number_of_studies: 7, id: 7 }, # Reticulorumen
     { animal_id: 1, organ_id: 8, mean: 0.26, standard_deviation: 0.07, sample_size: 696, number_of_studies: 1, id: 8 }, # Reticulum
     { animal_id: 1, organ_id: 9, mean: 1.75, standard_deviation: 0.35, sample_size: 869, number_of_studies: 4, id: 9 }, # Rumen
     { animal_id: 1, organ_id: 10, mean: 0.85, standard_deviation: 0.22, sample_size: 948, number_of_studies: 6, id: 10 }, # Omasum
     { animal_id: 1, organ_id: 11, mean: 0.37, standard_deviation: 0.10, sample_size: 948, number_of_studies: 6, id: 11 }, # Abomasum
-
     { animal_id: 1, organ_id: 12, id: 12 }, # Intestines
     { animal_id: 1, organ_id: 13, mean: 1.06, standard_deviation: 0.24, sample_size: 1158, number_of_studies: 10, id: 13 }, # Small Intestine
     { animal_id: 1, organ_id: 14, mean: 0.78, standard_deviation: 0.21, sample_size: 919, number_of_studies: 8, id: 14 }, # Large Intestine
@@ -129,7 +119,6 @@ references = [
     { id: 10, name: "Sainz", year: 1995 },
     { id: 11, name: "Keane", year: 2011 },
     { id: 12, name: "Hansard", year: 1953 },
-
     { id: 13, name: "Larsen", year: 2017 },
     { id: 14, name: "Rumsey", year: 1996 },
     { id: 15, name: "Long", year: 2010 },
@@ -142,7 +131,6 @@ references = [
     { id: 22, name: "Sharman", year: 2013 },
     { id: 23, name: "Sprinkle", year: 1998 },
     { id: 24, name: "Schumann", year: 2007 },
-
     { id: 25, name: "Reynolds", year: 2004 },
     { id: 26, name: "Remling", year: 2017 },
     { id: 27, name: "Mader", year: 2009 },
@@ -155,7 +143,6 @@ references = [
     { id: 34, name: "Schlegel", year: 2006 },
     { id: 35, name: "Olivares", year: 2019 },
     { id: 36, name: "McEvoy", year: 1998 },
-
     { id: 37, name: "Fiems", year: 1993 },
     { id: 38, name: "Long", year: 2012 },
     { id: 39, name: "Talton", year: 2014 },
@@ -177,79 +164,11 @@ parameters = [
     {name: "Hematocrit", id: 5}
 ]
 
-# Cardiac Output
-  # Unanesthetized Cattle
-  # Unanesthetized Calves
-  # Unanesthetized Swine
-# Blood Flow
-  # Adult Cattle
-  # Beef Cattle
-  # Dairy Cows
-  # Calves
-  # Swine
-# Vascular Space Fraction
-  # Adult Cattle
-  # Calves
-  # Growing Swine
-  # Aged Swine
-# Hematocrit
-  # Adult Cattle
-  # Calves
-  # Swine
-  # Swine in different age groups
-
 animals.each { |animal| Animal.create!(animal) }
 organs.each { |organ| Organ.create!(organ) }
 weights.each { |weight| Weight.create!(weight) }
 references.each { |reference| Publication.insert_reference!(reference) }
 parameters.each { |parameter| Parameter.create!(parameter) }
 
-# ADD REFERENCE NUMBERS
-Weight.find_by_id(1).add_reference_number_list([1, 2, 3]) # adrenals
-Weight.find_by_id(2).add_reference_number_list([4, 5, 6, 7, 8, 9, 10, 11, 48]) # adipose tissue
-Weight.find_by_id(3).add_reference_number_list([1, 12, 13, 14, 15, 16, 17, 18, 19]) # blood
-Weight.find_by_id(4).add_reference_number_list([11, 20]) # bone
-Weight.find_by_id(5).add_reference_number_list([1, 21]) # brain
-Weight.find_by_id(6).add_reference_number_list([4, 6, 14, 22, 23, 24]) # gi tract
-Weight.find_by_id(7).add_reference_number_list([15, 16, 22, 25, 26, 27, 28]) # reticulorumen
-Weight.find_by_id(8).add_reference_number_list([1]) # reticulum
-Weight.find_by_id(9).add_reference_number_list([1, 14, 29, 30]) # rumen
-Weight.find_by_id(10).add_reference_number_list([1, 15, 16, 22, 25, 27]) # omasum
-Weight.find_by_id(11).add_reference_number_list([1, 15, 16, 22, 25, 27]) # abomasum
-# intestines
-Weight.find_by_id(13).add_reference_number_list([1, 14, 15, 16, 17, 22, 25, 27, 29, 31]) # small intestine
-Weight.find_by_id(14).add_reference_number_list([1, 14, 15, 16, 17, 22, 25, 31]) # large intestine
-Weight.find_by_id(15).add_reference_number_list([17, 25, 27]) # caecum
-Weight.find_by_id(16).add_reference_number_list([27]) # colon
-Weight.find_by_id(17).add_reference_number_list([1, 2, 3, 4, 14, 15, 16, 17, 18, 22, 24, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42]) # heart
-Weight.find_by_id(18).add_reference_number_list([1, 4, 6, 14, 20, 23, 31, 32, 33, 36, 37, 40, 41, 43, 46]) # kidneys
-Weight.find_by_id(19).add_reference_number_list([1, 2, 3, 4, 6, 14, 15, 16, 17, 18, 19, 20, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 36, 37, 40, 41, 43, 44, 45, 46]) # liver
-Weight.find_by_id(20).add_reference_number_list([1, 2, 4, 32, 15, 16, 17, 18, 22, 24, 26, 27, 28, 29, 30, 33, 34, 37, 38, 39, 42]) # lungs
-Weight.find_by_id(21).add_reference_number_list([11, 47]) # muscle
-Weight.find_by_id(22).add_reference_number_list([1, 32, 15, 17, 22, 26, 24, 27, 30, 38, 39, 43]) # pancreas
-Weight.find_by_id(23).add_reference_number_list([1, 3, 4, 10, 14, 15, 16, 17, 18, 22, 24, 25, 26, 27, 28, 30, 32, 33, 34, 39, 41, 45]) # spleen
-Weight.find_by_id(24).add_reference_number_list([1]) # thyroid
-Weight.find_by_id(25).add_reference_number_list([1, 24, 26]) # thymus
-
-# CSV file reading
-CSV.read("lib/csv-tables/table2-with-ids.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
-CSV.read("lib/csv-tables/table3-with-ids.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
-CSV.read("lib/csv-tables/table4-with-ids.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
-CSV.read("lib/csv-tables/table5-with-ids.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
-CSV.read("lib/csv-tables/table6-with-ids.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
-CSV.read("lib/csv-tables/table7-with-ids.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
-CSV.read("lib/csv-tables/table9-with-ids.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
-CSV.read("lib/csv-tables/table10-with-ids.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
-CSV.read("lib/csv-tables/table11-with-ids.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
-CSV.read("lib/csv-tables/table12-with-ids.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
-CSV.read("lib/csv-tables/table13-to-17-with-ids.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
-CSV.read("lib/csv-tables/table19-with-ids.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
-CSV.read("lib/csv-tables/table21-with-ids.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
-CSV.read("lib/csv-tables/table23-with-ids.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
-CSV.read("lib/csv-tables/table24-with-ids.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
-CSV.read("lib/csv-tables/table28-with-ids.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
-CSV.read("lib/csv-tables/table29-with-ids.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
-CSV.read("lib/csv-tables/table30-with-ids.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
-CSV.read("lib/csv-tables/table32-with-ids.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
-CSV.read("lib/csv-tables/table33-with-ids.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
-CSV.read("lib/csv-tables/table34-to-37-hematocrit.csv", :headers => true).each { |row| Hemat.create!(row.to_h) }
+FirstReferenceSet.exe
+ReadCsvTables.exe

@@ -1,0 +1,27 @@
+<!--locals: { animal }-->
+<% if animal.present? && animal.hemat_data.count > 0 %>
+  <table id="t01">
+    <h1><%= animal.name %></h1>
+    <h5><%= "(Hematrocit Percentages)" %></h5>
+
+    <tr>
+      <th>Age</th>
+      <th>Mean</th>
+      <th>SD</th>
+      <th>Sample Size</th>
+      <th>Number of Studies</th>
+      <th>Body Weight (kg)</th>
+    </tr>
+
+    <% animal.hemat_data.each do |hemat| %>
+      <tr>
+        <td><%= hemat.age %></td>
+        <td><%= hemat.mean %></td>
+        <td><%= hemat.standard_deviation %></td>
+        <td><%= hemat.sample_size %></td>
+        <td><%= hemat.number_of_studies %></td>
+        <td><%= hemat.body_weight %></td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
