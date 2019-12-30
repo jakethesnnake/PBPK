@@ -1,5 +1,5 @@
 module FirstReferenceSet
-  def exe
+  def insert_first_set
     Weight.find_by_id(1).add_reference_number_list([1, 2, 3]) # adrenals
     Weight.find_by_id(2).add_reference_number_list([4, 5, 6, 7, 8, 9, 10, 11, 48]) # adipose tissue
     Weight.find_by_id(3).add_reference_number_list([1, 12, 13, 14, 15, 16, 17, 18, 19]) # blood

@@ -170,5 +170,5 @@ weights.each { |weight| Weight.create!(weight) }
 references.each { |reference| Publication.insert_reference!(reference) }
 parameters.each { |parameter| Parameter.create!(parameter) }
 
-FirstReferenceSet.exe
-ReadCsvTables.exe
+FirstReferenceSet.insert_first_set
+ReadCsvTables.read_all
