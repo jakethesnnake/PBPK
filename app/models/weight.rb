@@ -10,7 +10,9 @@ class Weight < ApplicationRecord
   before_validation :set_defaults
   after_create :add_list
 
-  # <TEMP>
+  # Public: creates associations from reference string values
+  #
+  # does nothing unless string is present
   def add_list
     return unless reference_string
     num_arr = reference_string.split(/,/)
@@ -35,17 +37,23 @@ class Weight < ApplicationRecord
     Animal.find_by_id(animal_id).name
   end
 
-  # <TEST>
+  # Public (setup): uses reference list to create associations between the weight and its associated publication(s)
+  #
+  # num_list - list of integers, referencing a publication
+  #
+  # raises Exception if parameter empty or invalid reference number
   def add_reference_number_list(num_list)
-    raise Exception unless num_list.count > 0
+    raise I18n.t('setup.errors.weight.nil_or_empty_list') unless num_list && num_list.count > 0
     num_list.each do |num|
       pub = Publication.find_by_reference_number(num)
-      raise Exception unless pub.is_a?(Publication)
+      raise I18n.t('setup.errors.weight.invalid_reference') unless pub.is_a?(Publication)
       add_publication(pub)
     end
   end
 
-  # <TEST>
+  # Public: returns all reference numbers for the associated publications
+  #
+  # returns [] if none exist
   def all_reference_numbers
     nums = []
     return nums unless publications.count > 0
