@@ -90,10 +90,8 @@ animals.each { |animal| Animal.create!(animal) }
 organs.each { |organ| Organ.create!(organ) }
 parameters.each { |parameter| Parameter.create!(parameter) }
 
-# add first set to database
-FirstSet.create_weights
+# adds first references to db (temp - prevents exception)
 FirstSet.create_references
-FirstSet.add_reference_lists
 
 # read all csv tables
 ReadTables.read_all

@@ -1,5 +1,6 @@
 module ReadTables
   def read_all
+    CSV.read("lib/csv-tables/table1.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
     CSV.read("lib/csv-tables/table2-with-ids.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
     CSV.read("lib/csv-tables/table3-with-ids.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
     CSV.read("lib/csv-tables/table4-with-ids.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
