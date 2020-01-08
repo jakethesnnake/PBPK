@@ -1,4 +1,6 @@
-- REFERENCE LIST
+References
+	- read text file lines (separated by ;)
+	- read full citations
 
 Other
 - delete 'test' folder

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_18_070722) do
+ActiveRecord::Schema.define(version: 2020_01_07_205605) do
 
   create_table "animals", force: :cascade do |t|
     t.string "name", null: false
@@ -25,6 +25,14 @@ ActiveRecord::Schema.define(version: 2019_12_18_070722) do
 
   create_table "authors", force: :cascade do |t|
     t.string "name", null: false
+  end
+
+  create_table "citations", force: :cascade do |t|
+    t.string "all_text"
+    t.integer "author_id", null: false
+    t.integer "year", null: false
+    t.index ["author_id"], name: "index_citations_on_author_id"
+    t.index ["year"], name: "index_citations_on_year"
   end
 
   create_table "hemats", force: :cascade do |t|
@@ -50,7 +58,10 @@ ActiveRecord::Schema.define(version: 2019_12_18_070722) do
   create_table "publications", force: :cascade do |t|
     t.integer "year", null: false
     t.integer "reference_number"
-    t.index ["reference_number"], name: "index_publications_on_reference_number", unique: true
+    t.integer "table_number"
+    t.index ["reference_number"], name: "index_publications_on_reference_number"
+    t.index ["table_number"], name: "index_publications_on_table_number"
+    t.index ["year"], name: "index_publications_on_year"
   end
 
   create_table "weight_publications", force: :cascade do |t|

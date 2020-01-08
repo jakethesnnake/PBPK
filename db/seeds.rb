@@ -95,3 +95,6 @@ FirstSet.create_references
 
 # read all csv tables
 ReadTables.read_all
+
+# adds list of full citations
+ReadTables.read_full_citation_list

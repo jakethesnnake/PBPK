@@ -1,4 +1,8 @@
 module ReadTables
+  def read_full_citation_list
+    CSV.read("lib/csv-tables/full-citation-list.csv", :headers => true).each { |row| Citation.create!(row.to_h) }
+  end
+
   def read_all
     CSV.read("lib/csv-tables/table1.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
     CSV.read("lib/csv-tables/table2-with-ids.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
