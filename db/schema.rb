@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_07_205605) do
+ActiveRecord::Schema.define(version: 2020_01_10_195005) do
 
   create_table "animals", force: :cascade do |t|
     t.string "name", null: false
@@ -62,6 +62,15 @@ ActiveRecord::Schema.define(version: 2020_01_07_205605) do
     t.index ["reference_number"], name: "index_publications_on_reference_number"
     t.index ["table_number"], name: "index_publications_on_table_number"
     t.index ["year"], name: "index_publications_on_year"
+  end
+
+  create_table "tables", force: :cascade do |t|
+    t.integer "parameter_id"
+    t.integer "animal_id"
+    t.integer "animal2_id"
+    t.index ["animal2_id"], name: "index_tables_on_animal2_id"
+    t.index ["animal_id"], name: "index_tables_on_animal_id"
+    t.index ["parameter_id"], name: "index_tables_on_parameter_id"
   end
 
   create_table "weight_publications", force: :cascade do |t|
