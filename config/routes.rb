@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   root 'home#index'
 
+  # references
+  get 'references/show', to: 'references#show', as: 'show_references'
+
+  # home
   get 'home/set_animal'
   get 'home/set_parameter'
   get 'home/filter'
@@ -13,7 +17,6 @@ Rails.application.routes.draw do
 
   resources :animal, only: [:index, :show]
   resources :home, only: [:index, :filter, :empty]
-  resources :publications, only: [:show]
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

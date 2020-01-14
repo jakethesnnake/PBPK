@@ -1,0 +1,12 @@
+[left off at Fries]
+	- test if unique (first author + year) for each citation
+
+Exception
+	- Lautz (2019) * 2
+	- Li (2019) * 2
+	- Lin (2016) * 3
+	- Reeves (1964a/1964b)
+	- Reynolds (1991a/1991b)
+	- Rotta (2015) * 2
+	- Shahin (1985a/1985b)
+	- USDA (2019a/2019b/2019c)

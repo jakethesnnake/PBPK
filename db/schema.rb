@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_18_070722) do
+ActiveRecord::Schema.define(version: 2020_01_12_011417) do
 
   create_table "animals", force: :cascade do |t|
     t.string "name", null: false
@@ -18,13 +18,16 @@ ActiveRecord::Schema.define(version: 2019_12_18_070722) do
     t.index ["parent_id"], name: "index_animals_on_parent_id"
   end
 
-  create_table "author_publications", force: :cascade do |t|
-    t.integer "author_id", null: false
-    t.integer "publication_id", null: false
-  end
-
   create_table "authors", force: :cascade do |t|
     t.string "name", null: false
+  end
+
+  create_table "citations", force: :cascade do |t|
+    t.text "all_text"
+    t.integer "author_id", null: false
+    t.integer "year", null: false
+    t.index ["author_id"], name: "index_citations_on_author_id"
+    t.index ["year"], name: "index_citations_on_year"
   end
 
   create_table "hemats", force: :cascade do |t|
@@ -47,15 +50,23 @@ ActiveRecord::Schema.define(version: 2019_12_18_070722) do
     t.string "name"
   end
 
-  create_table "publications", force: :cascade do |t|
-    t.integer "year", null: false
+  create_table "table_citations", force: :cascade do |t|
+    t.integer "table_id", null: false
+    t.integer "citation_id", null: false
     t.integer "reference_number"
-    t.index ["reference_number"], name: "index_publications_on_reference_number", unique: true
+    t.string "volume"
+    t.index ["citation_id"], name: "index_table_citations_on_citation_id"
+    t.index ["reference_number"], name: "index_table_citations_on_reference_number"
+    t.index ["table_id"], name: "index_table_citations_on_table_id"
   end
 
-  create_table "weight_publications", force: :cascade do |t|
-    t.integer "weight_id", null: false
-    t.integer "publication_id", null: false
+  create_table "tables", force: :cascade do |t|
+    t.integer "parameter_id"
+    t.integer "animal_id"
+    t.integer "animal2_id"
+    t.index ["animal2_id"], name: "index_tables_on_animal2_id"
+    t.index ["animal_id"], name: "index_tables_on_animal_id"
+    t.index ["parameter_id"], name: "index_tables_on_parameter_id"
   end
 
   create_table "weights", force: :cascade do |t|

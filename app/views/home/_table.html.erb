@@ -19,14 +19,7 @@
         <td><%= weight.standard_deviation %></td>
         <td><%= weight.sample_size %></td>
         <td><%= weight.number_of_studies %></td>
-        <td>
-          <% links = reference_links_from_weight(weight) %>
-          <% if links && links.count > 0 %>
-            <% links.each do |link| %>
-              <%= link + " " %>
-            <% end %>
-          <% end %>
-        </td>
+        <td><%= link_to("See References", show_references_path(id: weight.id), class: "btn-info") %></td>
       </tr>
     <% end %>
   </table>

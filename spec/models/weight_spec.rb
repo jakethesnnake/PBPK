@@ -35,20 +35,13 @@ RSpec.describe Weight, type: :model do
     it { is_expected.to eq(organ.name) }
   end
 
-  describe '#add_publication && #publications' do
-    let!(:weight) { FactoryBot.create(:weight) }
-    let!(:p1) { FactoryBot.create(:publication) }
-    let!(:p2) { FactoryBot.create(:publication) }
+  describe '#animal_name' do
+    let!(:organ) { FactoryBot.create(:organ) }
+    let!(:weight) { FactoryBot.create(:weight, organ_id: organ.id) }
 
-    subject { weight.publications }
+    subject { weight.animal_name }
 
-    before do
-      weight.add_publication(p1)
-      weight.add_publication(p2)
-    end
-
-    it { is_expected.to include(p1) }
-    it { is_expected.to include(p2) }
+    it { is_expected.to eq(weight.animal.name) }
   end
 
   describe '.animal' do

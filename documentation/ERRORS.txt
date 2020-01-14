@@ -1,0 +1,3 @@
+ERRORS
+	- table11: reference numbers are not given citations below
+	- table1: Fernades et al. (1996); (only "Fernandez" is an author)
