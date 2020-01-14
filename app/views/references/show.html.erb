@@ -9,8 +9,9 @@
   Organ: <%= @weight.organ_name %>
 </p>
 
-<% if @publications.count > 0 %>
-  <% @publications.each do |publication| %>
-    <%= mini_citation_hyperlink(publication) %><br>
+<!--NOT IMPLEMENTED-->
+<% if @references && @references.count > 0 %>
+  <% @references.each do |reference| %>
+    <%= reference_link(reference) %><br>
   <% end %>
 <% end %>

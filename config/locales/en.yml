@@ -35,4 +35,4 @@ en:
     errors:
       weight:
         nil_or_empty_list: "list nil or empty"
-        invalid_reference: "publication reference invalid"
+        invalid_reference: "reference number invalid"

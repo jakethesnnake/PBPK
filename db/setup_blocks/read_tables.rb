@@ -28,7 +28,13 @@ module ReadTables
     CSV.read("lib/csv-tables/table34-to-37-hematocrit.csv", :headers => true).each { |row| Hemat.create!(row.to_h) }
   end
 
-  def create_table_associations
+  def read_all_references
+    CSV.read("lib/csv-tables/references/table1.csv", :headers => true).each { |row| TableCitation.add!(row.to_h) }
+    CSV.read("lib/csv-tables/references/table2.csv", :headers => true).each { |row| TableCitation.add!(row.to_h) }
+    CSV.read("lib/csv-tables/references/table3.csv", :headers => true).each { |row| TableCitation.add!(row.to_h) }
+  end
+
+  def create_table_objects
     [
       { id: 1, animal_id: 1, parameter_id: 1 },
       { id: 2, animal_id: 2, parameter_id: 1 },

@@ -3,7 +3,6 @@ Rails.application.routes.draw do
 
   # references
   get 'references/show', to: 'references#show', as: 'show_references'
-  get 'references/full_individual', to: 'references#full_individual', as: 'full_individual'
 
   # home
   get 'home/set_animal'
@@ -18,7 +17,6 @@ Rails.application.routes.draw do
 
   resources :animal, only: [:index, :show]
   resources :home, only: [:index, :filter, :empty]
-  resources :publications, only: [:show]
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

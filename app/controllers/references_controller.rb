@@ -3,10 +3,6 @@ class ReferencesController < ApplicationController
 
   # params: { id }
   def show
-    @publications = @weight.publications
-  end
-
-  def full_individual
   end
 
   private

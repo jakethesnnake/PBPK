@@ -10,110 +10,6 @@ RSpec.describe Weight, type: :model do
     it { expect(weight.animal).to eq(animal) }
   end
 
-  describe '#add_list' do
-    subject { weight.add_list }
-
-    let(:weight) { FactoryBot.create(:weight, reference_string: str) }
-    let!(:p1) { FactoryBot.create(:publication, reference_number: 1) }
-    let!(:p2) { FactoryBot.create(:publication, reference_number: 2) }
-
-    before { allow(weight).to receive(:add_reference_number_list) }
-
-    context 'when no reference string' do
-      let!(:str) { nil }
-
-      it { expect(weight.all_reference_numbers).to eq([]) }
-    end
-
-    context 'when reference string of 1' do
-      let(:str) { "1" }
-
-      it { expect(weight.all_reference_numbers).to eq([1]) }
-    end
-
-    context 'when reference string of 2' do
-      let(:str) { "1,2" }
-
-      it { expect(weight.all_reference_numbers).to eq([1,2]) }
-    end
-  end
-
-  describe '#add_reference_number_list' do
-    let!(:weight) { FactoryBot.create(:weight) }
-    subject { weight.add_reference_number_list(num_list) }
-
-    context 'when nil' do
-      let(:num_list) { nil }
-
-      it { expect{ subject }.to raise_error( I18n.t('setup.errors.weight.nil_or_empty_list') ) }
-    end
-
-    context 'when empty' do
-      let(:num_list) { [] }
-
-      it { expect{ subject }.to raise_error( I18n.t('setup.errors.weight.nil_or_empty_list') ) }
-    end
-
-    context 'when invalid reference' do
-      let(:num_list) { [1] }
-
-      it { expect{ subject }.to raise_error( I18n.t('setup.errors.weight.invalid_reference') ) }
-    end
-
-    context 'when one valid reference' do
-      let!(:p1) { FactoryBot.create(:publication, reference_number: 1) }
-      let(:num_list) { [1] }
-
-      before { subject }
-
-      it { expect(WeightPublication.find_by(weight_id: weight.id, publication_id: p1.id)).not_to be_nil }
-    end
-
-    context 'when two valid references' do
-      let!(:p1) { FactoryBot.create(:publication, reference_number: 1) }
-      let!(:p2) { FactoryBot.create(:publication, reference_number: 2) }
-      let(:num_list) { [1,2] }
-
-      before { subject }
-
-      it { expect(WeightPublication.find_by(weight_id: weight.id, publication_id: p1.id)).not_to be_nil }
-      it { expect(WeightPublication.find_by(weight_id: weight.id, publication_id: p2.id)).not_to be_nil }
-      it { expect(weight.all_reference_numbers).to include(1) }
-      it { expect(weight.all_reference_numbers).to include(2) }
-    end
-  end
-
-  describe '#all_reference_numbers' do
-    let!(:weight) { FactoryBot.create(:weight) }
-
-    let!(:p1) { FactoryBot.create(:publication, reference_number: 1) }
-    let!(:p2) { FactoryBot.create(:publication, reference_number: 2) }
-
-    subject { weight.all_reference_numbers }
-
-    context 'when no reference numbers' do
-      it { is_expected.to eq([]) }
-    end
-
-    context 'when 1 reference number' do
-      let(:num_list) { [1] }
-
-      before { weight.add_reference_number_list(num_list) }
-
-      it { is_expected.to include(1) }
-      it { is_expected.not_to include(2) }
-    end
-
-    context 'when 2 reference numbers' do
-      let(:num_list) { [1,2] }
-
-      before { weight.add_reference_number_list(num_list) }
-
-      it { is_expected.to include(1) }
-      it { is_expected.to include(2) }
-    end
-  end
-
   describe '.parameter_id' do
     subject { FactoryBot.build(:weight, parameter_id: pid) }
 
@@ -146,22 +42,6 @@ RSpec.describe Weight, type: :model do
     subject { weight.animal_name }
 
     it { is_expected.to eq(weight.animal.name) }
-  end
-
-  describe '#add_publication && #publications' do
-    let!(:weight) { FactoryBot.create(:weight) }
-    let!(:p1) { FactoryBot.create(:publication) }
-    let!(:p2) { FactoryBot.create(:publication) }
-
-    subject { weight.publications }
-
-    before do
-      weight.add_publication(p1)
-      weight.add_publication(p2)
-    end
-
-    it { is_expected.to include(p1) }
-    it { is_expected.to include(p2) }
   end
 
   describe '.animal' do

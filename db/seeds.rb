@@ -3,10 +3,8 @@
 
 require 'csv'
 
-require_relative 'setup_blocks/first_set.rb'
 require_relative 'setup_blocks/read_tables.rb'
 
-include FirstSet
 include ReadTables
 
 animals = [
@@ -90,8 +88,8 @@ animals.each { |animal| Animal.create!(animal) }
 organs.each { |organ| Organ.create!(organ) }
 parameters.each { |parameter| Parameter.create!(parameter) }
 
-# adds first references to db (temp - prevents exception)
-FirstSet.create_references
+# creates table records (table-parameter-animal associations)
+ReadTables.create_table_objects
 
 # read all csv tables
 ReadTables.read_all
@@ -99,5 +97,5 @@ ReadTables.read_all
 # adds list of full citations
 ReadTables.read_full_citation_list
 
-# creates table records (table-parameter-animal associations)
-ReadTables.create_table_associations
+# adds all table references
+ReadTables.read_all_references
