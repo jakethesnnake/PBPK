@@ -6,3 +6,6 @@ Other
 - delete 'test' folder
 - card containers (better arrangement)
 	- Swine column and Cattle column
+	
+Citation
+	- volume letter (index) -- auto add

@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 2020_01_12_011417) do
 
   create_table "authors", force: :cascade do |t|
     t.string "name", null: false
+    t.index ["name"], name: "index_authors_on_name"
   end
 
   create_table "citations", force: :cascade do |t|

@@ -32,6 +32,27 @@ module ReadTables
     CSV.read("lib/csv-tables/references/table1.csv", :headers => true).each { |row| TableCitation.add!(row.to_h) }
     CSV.read("lib/csv-tables/references/table2.csv", :headers => true).each { |row| TableCitation.add!(row.to_h) }
     CSV.read("lib/csv-tables/references/table3.csv", :headers => true).each { |row| TableCitation.add!(row.to_h) }
+    CSV.read("lib/csv-tables/references/table4.csv", :headers => true).each { |row| TableCitation.add!(row.to_h) }
+    CSV.read("lib/csv-tables/references/table5.csv", :headers => true).each { |row| TableCitation.add!(row.to_h) }
+    CSV.read("lib/csv-tables/references/table6.csv", :headers => true).each { |row| TableCitation.add!(row.to_h) }
+    CSV.read("lib/csv-tables/references/table7.csv", :headers => true).each { |row| TableCitation.add!(row.to_h) }
+    CSV.read("lib/csv-tables/references/table9.csv", :headers => true).each { |row| TableCitation.add!(row.to_h) }
+    CSV.read("lib/csv-tables/references/table10.csv", :headers => true).each { |row| TableCitation.add!(row.to_h) }
+    CSV.read("lib/csv-tables/references/table11.csv", :headers => true).each { |row| TableCitation.add!(row.to_h) }
+    CSV.read("lib/csv-tables/references/table12.csv", :headers => true).each { |row| TableCitation.add!(row.to_h) }
+    CSV.read("lib/csv-tables/references/table13.csv", :headers => true).each { |row| TableCitation.add!(row.to_h) }
+    CSV.read("lib/csv-tables/references/table16.csv", :headers => true).each { |row| TableCitation.add!(row.to_h) }
+    CSV.read("lib/csv-tables/references/table17.csv", :headers => true).each { |row| TableCitation.add!(row.to_h) }
+    CSV.read("lib/csv-tables/references/table19.csv", :headers => true).each { |row| TableCitation.add!(row.to_h) }
+    CSV.read("lib/csv-tables/references/table21.csv", :headers => true).each { |row| TableCitation.add!(row.to_h) }
+    CSV.read("lib/csv-tables/references/table23.csv", :headers => true).each { |row| TableCitation.add!(row.to_h) }
+    CSV.read("lib/csv-tables/references/table24.csv", :headers => true).each { |row| TableCitation.add!(row.to_h) }
+    CSV.read("lib/csv-tables/references/table28.csv", :headers => true).each { |row| TableCitation.add!(row.to_h) }
+    CSV.read("lib/csv-tables/references/table29-33.csv", :headers => true).each { |row| TableCitation.add!(row.to_h) }
+    CSV.read("lib/csv-tables/references/table34.csv", :headers => true).each { |row| TableCitation.add!(row.to_h) }
+    CSV.read("lib/csv-tables/references/table35.csv", :headers => true).each { |row| TableCitation.add!(row.to_h) }
+    CSV.read("lib/csv-tables/references/table36.csv", :headers => true).each { |row| TableCitation.add!(row.to_h) }
+    CSV.read("lib/csv-tables/references/table37.csv", :headers => true).each { |row| TableCitation.add!(row.to_h) }
   end
 
   def create_table_objects
