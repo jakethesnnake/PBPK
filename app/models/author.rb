@@ -1,7 +1,7 @@
 class Author < ApplicationRecord
   validates :name, presence: true
 
-  def references
-    raise Exception
+  def citations
+    Citation.where(author_id: id)
   end
 end

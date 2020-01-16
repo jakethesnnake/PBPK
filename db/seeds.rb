@@ -97,5 +97,5 @@ ReadTables.read_all
 # adds list of full citations
 ReadTables.read_full_citation_list
 
-# adds all table references
+# adds all table citations
 ReadTables.read_all_references

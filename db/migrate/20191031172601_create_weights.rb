@@ -17,7 +17,7 @@ class CreateWeights < ActiveRecord::Migration[5.2]
       t.string :t_test, null: true
 
       # parameter id
-      t.integer :parameter_id, null: true, default: 1, index: true
+      t.integer :parameter_id, null: false, default: 1, index: true
     end
   end
 end

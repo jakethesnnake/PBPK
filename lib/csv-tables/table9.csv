@@ -1,4 +1,4 @@
-animal_id,organ_id,mean,standard_deviation,sample_size,number_of_studies,references
+animal_id,organ_id,mean,standard_deviation,sample_size,number_of_studies,reference_string
 11,27,0.005,0.001,111,3,"1,2,3"
 11,2,15.44,2.65,244,6,"4,5,6,7,8,9"
 11,3,4.12,0.46,302,5,"1,8,10,11,12"
@@ -22,4 +22,3 @@ animal_id,organ_id,mean,standard_deviation,sample_size,number_of_studies,referen
 11,25,0.28,0.03,8,1,1
 11,39,5.28,0.81,166,2,"6, 8"
 11,26,19.29,,,,
-,,,,,,

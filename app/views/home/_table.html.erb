@@ -19,7 +19,7 @@
         <td><%= weight.standard_deviation %></td>
         <td><%= weight.sample_size %></td>
         <td><%= weight.number_of_studies %></td>
-        <td><%= link_to("See References", show_references_path(id: weight.id), class: "btn-info") %></td>
+        <td><%= citation_link(weight) %></td>
       </tr>
     <% end %>
   </table>

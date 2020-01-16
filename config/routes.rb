@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   root 'home#index'
 
-  # references
-  get 'references/show', to: 'references#show', as: 'show_references'
+  # citations
+  get 'citations/show', to: 'citations#show', as: 'show_citations'
 
   # home
   get 'home/set_animal'

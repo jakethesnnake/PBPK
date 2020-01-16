@@ -10,13 +10,130 @@ RSpec.describe Weight, type: :model do
     it { expect(weight.animal).to eq(animal) }
   end
 
+  describe '#citations' do
+    subject { weight.citations }
+    let!(:weight) { FactoryBot.create(:weight, reference_string: list) }
+
+    context 'when no citations' do
+      let(:list) { nil }
+
+      it { is_expected.to eq([]) }
+    end
+
+    context 'when one citation' do
+      let(:list) { "1" }
+
+      let!(:c1) { FactoryBot.create(:citation) }
+      let!(:t1) { FactoryBot.create(:table) }
+
+      before do
+        FactoryBot.create(:table_citation, table_id: t1.id, citation_id: c1.id, reference_number: 1)
+        allow(weight).to receive(:table).and_return(t1)
+      end
+
+      it { is_expected.to eq([c1]) }
+    end
+
+    context 'when two citations' do
+      let(:list) { "1,2" }
+
+      let!(:c1) { FactoryBot.create(:citation) }
+      let!(:c2) { FactoryBot.create(:citation) }
+      let!(:t1) { FactoryBot.create(:table) }
+
+      before do
+        FactoryBot.create(:table_citation, table_id: t1.id, citation_id: c1.id, reference_number: 1)
+        FactoryBot.create(:table_citation, table_id: t1.id, citation_id: c2.id, reference_number: 2)
+        allow(weight).to receive(:table).and_return(t1)
+      end
+
+      it { is_expected.to include(c1) }
+      it { is_expected.to include(c2) }
+    end
+  end
+
+  describe '#reference_number_list' do
+    subject { weight.reference_number_list }
+    let!(:weight) { FactoryBot.create(:weight, reference_string: list) }
+
+    context 'when no refs' do
+      let(:list) { nil }
+
+      it { is_expected.to eq([]) }
+    end
+
+    context 'when one ref' do
+      let(:list) { "1" }
+
+      it { is_expected.to eq([1]) }
+    end
+
+    context 'when many refs (commas)' do
+      let(:list) { "1,2,3" }
+
+      it { is_expected.to eq([1,2,3]) }
+    end
+
+    context 'when many refs (dash)' do
+      let(:list) { "1-3" }
+
+      it { is_expected.to eq([1,2,3]) }
+    end
+
+    context 'when many refs (both)' do
+      let(:list) { "1,2-5,6" }
+
+      it { is_expected.to eq([1,2,3,4,5,6]) }
+    end
+  end
+
+  describe '#reference_list_to_int_array' do
+    subject { Weight.reference_list_to_int_array(list) }
+
+    context 'when nil' do
+      let(:list) { nil }
+
+      it { is_expected.to eq([]) }
+    end
+
+    context 'when one number' do
+      let(:list) { "1" }
+
+      it { is_expected.to eq([1]) }
+    end
+
+    context 'when 3 numbers' do
+      let(:list) { "1,2,3" }
+
+      it { is_expected.to eq([1,2,3]) }
+    end
+
+    context 'when dash only' do
+      let(:list) { "1-3" }
+
+      it { is_expected.to eq([1,2,3]) }
+    end
+
+    context 'when dash and commas (dash in middle)' do
+      let(:list) { "1,3-5,7" }
+
+      it { is_expected.to eq([1,3,4,5,7]) }
+    end
+
+    context 'when commas and dash (comma in middle)' do
+      let(:list) { "1-3,4,6-9" }
+
+      it { is_expected.to eq([1,2,3,4,6,7,8,9]) }
+    end
+  end
+
   describe '.parameter_id' do
     subject { FactoryBot.build(:weight, parameter_id: pid) }
 
     context 'when nil' do
       let(:pid) { nil }
 
-      it { is_expected.to be_valid }
+      it { is_expected.not_to be_valid }
     end
 
     context 'when valid' do

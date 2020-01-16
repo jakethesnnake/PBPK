@@ -27,6 +27,10 @@ class Citation < ApplicationRecord
     text.split(',').first
   end
 
+  def author_name
+    Author.find_by_id(author_id).name
+  end
+
   # Private: sets default values before create
   def set_defaults
     self.year ||= Citation.parse_year(all_text)

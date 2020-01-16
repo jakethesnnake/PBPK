@@ -1,6 +1,32 @@
 require 'rails_helper'
 
 RSpec.describe Table, type: :model do
+  describe 'associations' do
+    subject { table.citation_by_ref_num(number) }
+
+    let!(:table) { FactoryBot.create(:table) }
+    let!(:citation) { FactoryBot.create(:citation) }
+    before { FactoryBot.create(:table_citation, table_id: table.id, citation_id: citation.id, reference_number: 1) }
+
+    context 'when ref num valid' do
+      let(:number) { 1 }
+
+      it { is_expected.to eq(citation) }
+    end
+
+    context 'when ref num nil' do
+      let(:number) { nil }
+
+      it { is_expected.to be_nil }
+    end
+
+    context 'when ref num invalid' do
+      let(:number) { 99 }
+
+      it { is_expected.to be_nil }
+    end
+  end
+
   describe '#animal' do
     subject { table.animal }
     let!(:table) { FactoryBot.create(:table) }

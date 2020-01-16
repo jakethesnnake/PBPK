@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 2020_01_12_011417) do
     t.integer "number_of_studies", null: false
     t.decimal "body_weight"
     t.string "age"
+    t.string "reference_string"
     t.index ["animal_id"], name: "index_hemats_on_animal_id"
   end
 
@@ -79,7 +80,7 @@ ActiveRecord::Schema.define(version: 2020_01_12_011417) do
     t.integer "number_of_studies"
     t.string "reference_string"
     t.string "t_test"
-    t.integer "parameter_id", default: 1
+    t.integer "parameter_id", default: 1, null: false
     t.index ["parameter_id"], name: "index_weights_on_parameter_id"
   end
 

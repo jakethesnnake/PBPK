@@ -1,7 +1,3 @@
-References
-	- read text file lines (separated by ;)
-	- read full citations
-
 Other
 - delete 'test' folder
 - card containers (better arrangement)
@@ -9,3 +5,8 @@ Other
 	
 Citation
 	- volume letter (index) -- auto add
+	- see reference -- only apply to citation with individual weight references
+
+Hemat
+    - reference string
+    - table

@@ -1,0 +1,27 @@
+<!--MODIFY THIS FOR HEMAT-->
+<h1><u>Weight</u></h1>
+  <p class="weight-info">
+    (Animal) <%= @weight.animal_name %>
+  </p>
+  <p class="weight-info">
+    (Organ) <%= @weight.organ_name %>
+  </p>
+  <p class="weight-info">
+    (Parameter) <%= @weight.parameter.name %>
+  </p>
+
+<div class="sources">
+  <h1><u>Sources</u></h1>
+  <% @citations.each do |citation| %>
+    <div class="mini-citation">
+      <%= citation.author_name %> et al. (<%= citation.year %>) ;
+    </div>
+  <% end %>
+</div>
+
+<h1><u>Full Citations</u></h1>
+  <% @citations.each do |citation| %>
+    <p class="hanging-indent">
+      <%= citation.all_text %><br><br>
+    </p>
+  <% end %>
