@@ -8,5 +8,4 @@ Citation
 	- see reference -- only apply to citation with individual weight references
 
 Hemat
-    - reference string
-    - table
+	- merge into weight (fix view)

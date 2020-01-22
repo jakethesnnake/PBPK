@@ -31,18 +31,6 @@ ActiveRecord::Schema.define(version: 2020_01_12_011417) do
     t.index ["year"], name: "index_citations_on_year"
   end
 
-  create_table "hemats", force: :cascade do |t|
-    t.integer "animal_id", null: false
-    t.decimal "mean", null: false
-    t.decimal "standard_deviation", null: false
-    t.integer "sample_size", null: false
-    t.integer "number_of_studies", null: false
-    t.decimal "body_weight"
-    t.string "age"
-    t.string "reference_string"
-    t.index ["animal_id"], name: "index_hemats_on_animal_id"
-  end
-
   create_table "organs", force: :cascade do |t|
     t.string "name", null: false
     t.integer "parent_id"
@@ -74,13 +62,15 @@ ActiveRecord::Schema.define(version: 2020_01_12_011417) do
   create_table "weights", force: :cascade do |t|
     t.integer "organ_id", null: false
     t.integer "animal_id", null: false
+    t.integer "parameter_id", default: 1, null: false
     t.decimal "mean"
     t.decimal "standard_deviation"
     t.integer "sample_size"
     t.integer "number_of_studies"
     t.string "reference_string"
     t.string "t_test"
-    t.integer "parameter_id", default: 1, null: false
+    t.decimal "body_weight"
+    t.string "age"
     t.index ["parameter_id"], name: "index_weights_on_parameter_id"
   end
 

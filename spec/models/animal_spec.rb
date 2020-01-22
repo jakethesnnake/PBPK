@@ -71,7 +71,7 @@ RSpec.describe Animal, type: :model do
 
     context 'when id 5 only' do
       let!(:p5) { FactoryBot.create(:parameter, id: 5) }
-      let!(:h1) { FactoryBot.create(:hemat, animal_id: animal.id) }
+      let!(:w1) { FactoryBot.create(:weight, parameter_id: 5, animal_id: animal.id) }
 
       it { expect(params).to eq([p5]) }
     end
@@ -81,9 +81,10 @@ RSpec.describe Animal, type: :model do
     subject { animal.hemat_data }
 
     context 'when data' do
-      let!(:h1) { FactoryBot.create(:hemat, animal_id: animal.id) }
+      let!(:p5) { FactoryBot.create(:parameter, id: 5) }
+      let!(:w1) { FactoryBot.create(:weight, animal_id: animal.id, parameter_id: 5) }
 
-      it { is_expected.to include(h1) }
+      it { is_expected.to include(w1) }
     end
 
     context 'when no data' do
@@ -131,8 +132,8 @@ RSpec.describe Animal, type: :model do
     end
 
     context 'when data for p5' do
-      let!(:o1) { FactoryBot.create(:organ) }
-      let!(:h1) { FactoryBot.create(:hemat, animal_id: animal.id) }
+      let!(:p5) { FactoryBot.create(:parameter, id: 5) }
+      let!(:w1) { FactoryBot.create(:weight, parameter_id: 5, animal_id: animal.id) }
 
 
       context 'when p1 is param' do
@@ -140,7 +141,7 @@ RSpec.describe Animal, type: :model do
       end
 
       context 'when p5 is param' do
-        let(:parameter) { FactoryBot.create(:parameter, id: 5) }
+        let!(:parameter) { p5 }
 
         it { is_expected.to be_truthy }
       end

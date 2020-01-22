@@ -25,7 +25,7 @@ module ReadTables
     CSV.read("lib/csv-tables/table30.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
     CSV.read("lib/csv-tables/table32.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
     CSV.read("lib/csv-tables/table33.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
-    CSV.read("lib/csv-tables/table34-to-37-hemat.csv", :headers => true).each { |row| Hemat.create!(row.to_h) }
+    CSV.read("lib/csv-tables/table34-to-37.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
   end
 
   def read_all_references

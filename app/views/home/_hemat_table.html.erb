@@ -11,6 +11,7 @@
       <th>Sample Size</th>
       <th>Number of Studies</th>
       <th>Body Weight (kg)</th>
+      <th>References</th>
     </tr>
 
     <% animal.hemat_data.each do |hemat| %>
@@ -21,6 +22,7 @@
         <td><%= hemat.sample_size %></td>
         <td><%= hemat.number_of_studies %></td>
         <td><%= hemat.body_weight %></td>
+        <td><%= citation_link(hemat) %></td>
       </tr>
     <% end %>
   </table>

@@ -141,7 +141,7 @@ class Animal < ApplicationRecord
   #
   # returns [] otherwise
   def hemat_data
-    Hemat.where(animal_id: id)
+    Weight.where(animal_id: id, parameter_id: 5)
   end
 
   # Public: returns true if the animal has data for a given parameter
@@ -150,8 +150,7 @@ class Animal < ApplicationRecord
   def has_parameter_data?(parameter)
     return unless parameter.is_a?(Parameter)
     weights = weights_for_parameter(parameter)
-    return true if weights.count > 0
-    hemat_data.count > 0 && parameter.id == 5
+    weights.count > 0
   end
 
   private

@@ -7,9 +7,8 @@ class CitationsController < ApplicationController
   end
 
   def set_weight
-    @weight = Weight.find_by_id(params[:weight_id]) || Hemat.find_by_id(params[:hemat_id])
+    @weight = Weight.find_by_id(params[:weight_id])
     @table = @weight.table
     raise Exception unless @weight && @table
-    raise 'not implemented hemat' if @weight.is_a?(Hemat)
   end
 end
