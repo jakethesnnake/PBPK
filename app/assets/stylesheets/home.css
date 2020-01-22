@@ -105,9 +105,7 @@ div.indent-grandchild {
   -ms-user-select: none;
   user-select: none;
   align-items: center;
-  align-content: center;
-  justify-content: center;
-  max-width: 800px;
+  width: 800px;
 }
 .card.parameter {
   display: block;
@@ -129,4 +127,12 @@ div.indent-grandchild {
   font-size: var(--default-font-size);
   max-width: 1200px;
   margin: 30px 300px 10px var(--default-side-margin); /* top right bottom left */
+}
+
+.radio-button-btn-label.white.disabled {
+  font-weight: 200;
+}
+
+.radio-button-btn-label.white.enabled {
+  font-weight: 600;
 }
