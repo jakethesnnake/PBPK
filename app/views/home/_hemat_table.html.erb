@@ -5,23 +5,23 @@
     <h5><%= "(Hematrocit Percentages)" %></h5>
 
     <tr>
-      <th>Age</th>
       <th>Mean</th>
       <th>SD</th>
       <th>Sample Size</th>
       <th>Number of Studies</th>
       <th>Body Weight (kg)</th>
+      <th>Age</th>
       <th>References</th>
     </tr>
 
     <% animal.hemat_data.each do |hemat| %>
       <tr>
-        <td><%= hemat.age %></td>
         <td><%= hemat.mean %></td>
         <td><%= hemat.standard_deviation %></td>
         <td><%= hemat.sample_size %></td>
         <td><%= hemat.number_of_studies %></td>
         <td><%= hemat.body_weight %></td>
+        <td><%= hemat.age %></td>
         <td><%= citation_link(hemat) %></td>
       </tr>
     <% end %>
