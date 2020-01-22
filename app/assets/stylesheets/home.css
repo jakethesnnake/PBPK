@@ -130,9 +130,14 @@ div.indent-grandchild {
 }
 
 .radio-button-btn-label.white.disabled {
-  font-weight: 200;
+  font-weight: 100;
+  /*text-decoration: line-through;*/
 }
 
 .radio-button-btn-label.white.enabled {
   font-weight: 600;
+}
+
+.headline {
+  text-align: center;
 }

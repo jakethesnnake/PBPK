@@ -1,12 +1,9 @@
-<br>
-  <h1 class="text-center"><%= "Physiological Parameters" %></h1>
+<h1 class="headline">
+  <%= "Physiological Parameters" %>
+  <%= link_to "Clear All Filters", root_path, class: 'btn btn-primary' if filters_exist? %>
+</h1>
+
 <hr>
-
-<div class="text-center">
-  <%= link_to "Clear All Filters", root_path, class: 'btn btn-primary' %>
-</div>
-
-<br>
 
 <div class="row">
   <div class="animal">
