@@ -10,6 +10,15 @@ class Table < ApplicationRecord
     raise Exception
   end
 
+  def collective_citations
+    c_arr = []
+    table_citations.each do |pair|
+      c = Citation.find_by_id(pair.citation_id)
+      c_arr << c unless c_arr.include?(c)
+    end
+    c_arr
+  end
+
   def citation_by_ref_num(num)
     return unless num.is_a?(Integer)
     table_citation = TableCitation.find_by(table_id: id, reference_number: num.to_i)

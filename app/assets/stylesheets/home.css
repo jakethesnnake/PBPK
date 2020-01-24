@@ -139,5 +139,6 @@ div.indent-grandchild {
 }
 
 .headline {
-  text-align: center;
+  margin-left: 18%;
+  font-weight: 700;
 }

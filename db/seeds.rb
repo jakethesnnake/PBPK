@@ -74,7 +74,7 @@ organs = [
     { name: "Pituitary Gland", id: 44 },
     { name: "Loin Muscle", id: 45 },
     { name: "Gastrocnemius Muscle", id: 46 },
-    { name: "Hematocrit (%)", id: 47 }
+    { name: "Hematocrit Percentage", id: 47 }
 ]
 parameters = [
     {name: "Organ Weight", id: 1},
@@ -99,3 +99,6 @@ ReadTables.read_full_citation_list
 
 # adds all table citations
 ReadTables.read_all_references
+
+# adds table only citations
+ReadTables.read_table_only_citations
