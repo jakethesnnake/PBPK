@@ -30,7 +30,8 @@ class HomeController < ApplicationController
     return redirect_to(root_url) unless @animal
 
     @parameters = @animal.parameters
-    @parameter = Parameter.find_by_id(params[:parameter_id]) || @parameters.first
+    parameter = Parameter.find_by_id(params[:parameter_id])
+    @parameters.include?(parameter) ? @parameter = parameter : @parameter = @parameters.first
     @organs = @animal.organs_for_parameter(@parameter)
   end
 

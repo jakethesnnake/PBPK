@@ -8,10 +8,15 @@
       </header>
       <div class="filter-content">
         <div class="card-body-parameter">
-          <% parameters.each do |parameter| %>
+          <% Parameter.all.each do |parameter| %>
             <div class="radio-button-btn-wrapper mr-2">
-              <%= f.radio_button :parameter_id, "#{parameter.id}", checked: current_parameter == parameter, class: "radio-button-btn-param background-red" %>
-              <%= label_tag :parameter_id, parameter.name, class: "radio-button-btn-label white" %>
+              <% if parameters.include?(parameter) %>
+                <%= f.radio_button :parameter_id, "#{parameter.id}", checked: current_parameter == parameter, class: "radio-button-btn-param background-red" %>
+                <%= label_tag :parameter_id, parameter.name, class: "radio-button-btn-label white enabled" %>
+              <% else %>
+                <%= f.radio_button :parameter_id, "#{parameter.id}", checked: current_parameter == parameter, class: "radio-button-btn-param background-red", disabled: true %>
+                <%= label_tag :parameter_id, parameter.name, class: "radio-button-btn-label white disabled" %>
+              <% end %>
             </div>
           <% end %>
         </div>

@@ -25,7 +25,7 @@ class Weight < ApplicationRecord
   def citations
     nums = reference_number_list
     arr = []
-    return arr unless nums && nums.count > 0
+    return table.try(:collective_citations) || [] unless nums && nums.count > 0
     nums.each do |num|
       c = table.citation_by_ref_num(num)
       arr << c
@@ -56,7 +56,8 @@ class Weight < ApplicationRecord
   end
 
   def table
-    Table.find_by(parameter_id: parameter_id, animal_id: animal.id)
+    Table.find_by(parameter_id: parameter_id, animal_id: animal.id) ||
+        Table.find_by(parameter_id: parameter_id, animal2_id: animal.id)
   end
 
   def organ_name

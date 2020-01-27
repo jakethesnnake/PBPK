@@ -1,6 +1,28 @@
 require 'rails_helper'
 
 RSpec.describe Table, type: :model do
+  describe '#table' do
+    subject { weight.table }
+    let!(:weight) { FactoryBot.create(:weight, parameter_id: parameter.id) }
+    let!(:parameter) { FactoryBot.create(:parameter) }
+
+    context 'when no table' do
+      it { is_expected.to be_nil }
+    end
+
+    context 'when table (animal_id)' do
+      let!(:table) { FactoryBot.create(:table, animal_id: weight.animal.id, parameter_id: parameter.id) }
+
+      it { is_expected.to eq(table) }
+    end
+
+    context 'when table (animal2_id)' do
+      let!(:table) { FactoryBot.create(:table, animal2_id: weight.animal.id, parameter_id: parameter.id) }
+
+      it { is_expected.to eq(table) }
+    end
+  end
+
   describe 'associations' do
     subject { table.citation_by_ref_num(number) }
 

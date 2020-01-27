@@ -1,12 +1,14 @@
+Bug
+	- Female Swine "See References" raises exception at least once
 Other
-- delete 'test' folder
-- card containers (better arrangement)
-	- Swine column and Cattle column
+	- ADULT CATTLE IN WRONG POSITION
+	- delete 'test' folder
+	- card containers (better arrangement)
+		- Swine column and Cattle column
 	
 Citation
 	- volume letter (index) -- auto add
 	- see reference -- only apply to citation with individual weight references
 
 Hemat
-    - reference string
-    - table
+	- merge into weight (fix view)

@@ -3,6 +3,7 @@ class CreateWeights < ActiveRecord::Migration[5.2]
     create_table :weights do |t|
       t.integer :organ_id, null: false
       t.integer :animal_id, null: false
+      t.integer :parameter_id, null: false, default: 1, index: true
 
       # empty categories can be added
       t.decimal :mean, null: true
@@ -10,14 +11,13 @@ class CreateWeights < ActiveRecord::Migration[5.2]
       t.integer :sample_size, null: true
       t.integer :number_of_studies, null: true
 
-      # list of reference numbers
+      # optional
       t.string :reference_string, null: true
-
-      # t test
       t.string :t_test, null: true
 
-      # parameter id
-      t.integer :parameter_id, null: false, default: 1, index: true
+      # (hemat)
+      t.decimal :body_weight, null: true
+      t.string :age, null: true
     end
   end
 end

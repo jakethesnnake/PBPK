@@ -1,7 +1,6 @@
 module HomeHelper
   # Public: evaluates the association between the parameter and the instance variable
   # if equal (or included), true. Otherwise, false.
-  # <TEST>
   def checked(obj)
     return @animal == obj if obj.is_a?(Animal)
     return @parameter == obj if obj.is_a?(Parameter)
@@ -18,6 +17,10 @@ module HomeHelper
   def organ_indent_class(organ)
     return "grandchild" if organ.is_grandchild?
     "child" if organ.is_child?
+  end
+
+  def filters_exist?
+    @animal || @parameter
   end
 
   def animal_indent_class(animal)

@@ -3,13 +3,13 @@ class CitationsController < ApplicationController
 
   def show
     @citations = @weight.citations.sort_by { |weight| weight.author_name }
-    raise 'no citations' unless @citations
+    raise 'no citations' unless @citations && @citations.count > 0
   end
 
   def set_weight
-    @weight = Weight.find_by_id(params[:weight_id]) || Hemat.find_by_id(params[:hemat_id])
+    @weight = Weight.find_by_id(params[:weight_id])
     @table = @weight.table
-    raise Exception unless @weight && @table
-    raise 'not implemented hemat' if @weight.is_a?(Hemat)
+    raise Exception unless @weight
+    raise Exception unless @table
   end
 end

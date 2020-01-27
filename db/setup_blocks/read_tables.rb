@@ -25,7 +25,7 @@ module ReadTables
     CSV.read("lib/csv-tables/table30.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
     CSV.read("lib/csv-tables/table32.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
     CSV.read("lib/csv-tables/table33.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
-    CSV.read("lib/csv-tables/table34-to-37-hemat.csv", :headers => true).each { |row| Hemat.create!(row.to_h) }
+    CSV.read("lib/csv-tables/table34-to-37.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
   end
 
   def read_all_references
@@ -53,6 +53,14 @@ module ReadTables
     CSV.read("lib/csv-tables/citations/table35.csv", :headers => true).each { |row| TableCitation.add!(row.to_h) }
     CSV.read("lib/csv-tables/citations/table36.csv", :headers => true).each { |row| TableCitation.add!(row.to_h) }
     CSV.read("lib/csv-tables/citations/table37.csv", :headers => true).each { |row| TableCitation.add!(row.to_h) }
+  end
+
+  def read_table_only_citations
+    CSV.read("lib/csv-tables/citations/table_only/table4.csv", :headers => true).each { |row| TableCitation.add!(row.to_h) }
+    CSV.read("lib/csv-tables/citations/table_only/table5.csv", :headers => true).each { |row| TableCitation.add!(row.to_h) }
+    CSV.read("lib/csv-tables/citations/table_only/table13-17.csv", :headers => true).each { |row| TableCitation.add!(row.to_h) }
+    CSV.read("lib/csv-tables/citations/table_only/table29-33.csv", :headers => true).each { |row| TableCitation.add!(row.to_h) }
+    CSV.read("lib/csv-tables/citations/table_only/table34-37.csv", :headers => true).each { |row| TableCitation.add!(row.to_h) }
   end
 
   def create_table_objects
