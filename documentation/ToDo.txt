@@ -1,3 +1,5 @@
+Bug
+	- Female Swine "See References" raises exception at least once
 Other
 	- ADULT CATTLE IN WRONG POSITION
 	- delete 'test' folder
