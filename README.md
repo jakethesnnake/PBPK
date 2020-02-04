@@ -22,11 +22,9 @@ aggregated by the K-State College of Veterinary Medicine
 
 Copyright @ 2020 KSU College of Veterinary Medicine or original authors.
 
-## Developed by
+## Developer
 
-Jake Willson
-K-State Senior in Computer Science
-(jakedwillson@ksu.edu)
+Jake Willson (jakedwillson@ksu.edu)
 
 ## Repository
 
