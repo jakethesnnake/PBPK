@@ -33,12 +33,6 @@ class Animal < ApplicationRecord
     parent_id.present?
   end
 
-  # Public: returns true if animal has parent && grandparent
-  def is_grandchild?
-    return false unless parent
-    parent.is_child?
-  end
-
   # Public: returns all organ weights for animal
   def organ_weights
     Weight.where(animal_id: id)
@@ -58,21 +52,13 @@ class Animal < ApplicationRecord
     final
   end
 
-  # Public: returns sorted table of animals
-  #
-  # from parents -> children -> grandchildren
-  def self.sorted
+  # Public: returns ordered list of animals
+  def self.ordered
     arr = []
-    Animal.all.each do |animal|
-      next if animal.is_child?
-      arr << animal
-      animal.children.each do |a|
-        arr << a
-        next unless a.children.count > 0
-        a.children.each do |grandchild|
-          arr << grandchild
-        end
-      end
+    ord = [21,10,2,8,9,6,7,3,4,5,11,12,13,14,15,16,17]
+
+    ord.each do |num|
+      arr << Animal.find_by_id(num)
     end
     arr
   end

@@ -10,17 +10,17 @@ class HomeController < ApplicationController
 
   def set_parameter
     @parameter = Parameter.find_by_id(params[:parameter_id])
+    @animal = Animal.find_by_id(params[:animal_id])
 
     return redirect_to(root_url) unless @parameter
 
-    @animal = Animal.find_by_id(params[:animal_id])
     if @animal
       @parameters = @animal.parameters
       @organs = @animal.organs_for_parameter(@parameter) unless @parameter.id == 5
     else
-      @animals = @parameter.animal_list
       @organs = nil
     end
+
     redirect_to(root_url) unless @parameters && @animals
   end
 
@@ -47,7 +47,7 @@ class HomeController < ApplicationController
   private
 
     def set_defaults
-      @animals = Animal.sorted
+      @animals = Animal.ordered
       @parameters = Parameter.all
     end
 

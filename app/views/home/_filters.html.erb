@@ -7,7 +7,11 @@
 
 <div class="row">
   <div class="animal">
-    <%= render :partial => 'shared/animal_radio_box_form', locals: { current_animal: @animal, animals: @animals, parameter: @parameter } %>
+    <% if @parameter && @animal.nil? %>
+      <%= render :partial => 'shared/animal_radio_box_form_filtered', locals: { animals: @animals, parameter: @parameter } %>
+    <% else %>
+      <%= render :partial => 'shared/animal_radio_box_form', locals: { current_animal: @animal, animals: @animals, parameter: @parameter } %>
+    <% end %>
   </div>
   <div class="parameter">
     <%= render :partial => 'shared/parameter_radio_box_form', locals: { current_parameter: @parameter, animal: @animal, parameters: @parameters } %>
@@ -28,3 +32,9 @@
         }
     });
 </script>
+
+<style>
+  body {
+    background-color: lightskyblue;
+  }
+</style>

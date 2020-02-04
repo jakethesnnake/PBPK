@@ -15,7 +15,7 @@ class TableCitation < ApplicationRecord
 
     raise "author error: author_name=#{name} and year=#{year}" unless author
     raise "year error: author_name=#{name} and year=#{year}" unless year
-    raise 'table error' unless table
+    raise "table error: row=#{row.to_s}" unless table
 
     citation = Citation.find_by(author_id: author.id, year: year)
 

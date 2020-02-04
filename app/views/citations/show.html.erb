@@ -1,27 +1,32 @@
-<!--MODIFY THIS FOR HEMAT-->
-<h1><u>Weight</u></h1>
+<h1>Compartment</h1>
   <p class="weight-info">
-    (Animal) <%= @weight.animal_name %>
-  </p>
-  <p class="weight-info">
-    (Organ) <%= @weight.organ_name %>
-  </p>
-  <p class="weight-info">
-    (Parameter) <%= @weight.parameter.name %>
+    (Animal) : <%= @weight.animal_name %><br>
+    (Organ) : <%= @weight.organ_name %><br>
+    (Parameter) : <%= @weight.parameter.name %>
   </p>
 
 <div class="sources">
-  <h1><u>Sources</u></h1>
+  <h1>Sources</h1>
+  <% i = 0 %>
   <% @citations.each do |citation| %>
+    <% i = i + 1 %>
     <div class="mini-citation">
-      <%= citation.author_name %> et al. (<%= citation.year %>) ;
+      (<%= i %>) <%= citation.author_name %> et al. (<%= citation.year %>)
     </div>
   <% end %>
 </div>
 
-<h1><u>Full Citations</u></h1>
+<h1>Full Citations</h1>
+  <% i = 0 %>
   <% @citations.each do |citation| %>
+    <% i = i + 1 %>
     <p class="hanging-indent">
-      <%= citation.all_text %><br><br>
+      (<%= i %>) <%= citation.all_text %><br><br>
     </p>
   <% end %>
+
+<style>
+  body {
+    background-color: lightgoldenrodyellow;
+  }
+</style>

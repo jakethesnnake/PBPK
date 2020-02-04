@@ -8,24 +8,24 @@ require_relative 'setup_blocks/read_tables.rb'
 include ReadTables
 
 animals = [
-    { name: "Cattle", id: 1 },
-    { name: "Beef Cattle", id: 2, parent_id: 1 },
-    { name: "Dairy Cows", id: 3, parent_id: 1 },
-    { name: "Jersey", id: 4, parent_id: 3 },
-    { name: "Holstein", id: 5, parent_id: 3 },
-    { name: "Angus", id: 6, parent_id: 2 },
-    { name: "Hereford", id: 7, parent_id: 2 },
-    { name: "Male Beef Cattle", id: 8, parent_id: 2 },
-    { name: "Female Beef Cattle", id: 9, parent_id: 2 },
-    { name: "Calves", id: 10, parent_id: 1 },
+    { name: "Adult Cattle", id: 21, },
+    { name: "Calves", id: 10 },
+    { name: "Beef Cattle", id: 2 },
+      { name: "Male Beef Cattle", id: 8, parent_id: 2 },
+      { name: "Female Beef Cattle", id: 9, parent_id: 2 },
+      { name: "Angus", id: 6, parent_id: 2 },
+      { name: "Hereford", id: 7, parent_id: 2 },
+    { name: "Dairy Cows", id: 3 },
+      { name: "Jersey", id: 4, parent_id: 3 },
+      { name: "Holstein", id: 5, parent_id: 3 },
+
     { name: "Swine", id: 11 },
-    { name: "Male Swine", id: 12, parent_id: 11 },
-    { name: "Female Swine", id: 13, parent_id: 11 },
-    { name: "Market-Age Swine", id: 14, parent_id: 11 },
-    { name: "Growing Swine", id: 15, parent_id: 11 },
-    { name: "Aged Swine", id: 16, parent_id: 11 },
-    { name: "Different Age Groups of Swine", id: 17, parent_id: 11 },
-    { name: "Adult Cattle", id: 21, parent_id: 1 }
+      { name: "Male Swine", id: 12, parent_id: 11 },
+      { name: "Female Swine", id: 13, parent_id: 11 },
+      { name: "Market-Age Swine", id: 14, parent_id: 11 },
+      { name: "Growing Swine", id: 15, parent_id: 11 },
+      { name: "Aged Swine", id: 16, parent_id: 11 },
+      { name: "Different Age Groups of Swine", id: 17, parent_id: 11 }
 ]
 organs = [
     { name: "Adrenals", id: 1 },

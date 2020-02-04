@@ -65,7 +65,7 @@ module ReadTables
 
   def create_table_objects
     [
-      { id: 1, animal_id: 1, parameter_id: 1 },
+      { id: 1, animal_id: 21, parameter_id: 1 },
       { id: 2, animal_id: 2, parameter_id: 1 },
       { id: 3, animal_id: 3, parameter_id: 1 },
       { id: 4, animal_id: 4, parameter_id: 1, animal2_id: 5 },

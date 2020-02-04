@@ -1,24 +1,29 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Ruby on Rails web application for viewing the Physiological Parameter data
+aggregated by the K-State College of Veterinary Medicine
 
-Things you may want to cover:
+* Ruby version = 2.5.1
+* System dependencies listed in Gemfile
 
-* Ruby version
+## Install Dependencies
 
-* System dependencies
+    sudo bundle install
 
-* Configuration
+## Database Initialization
 
-* Database creation
+    bundle exec rake db:drop db:create db:migrate db:seed
 
-* Database initialization
+## Run server locally
 
-* How to run the test suite
+    rails s
 
-* Services (job queues, cache servers, search engines, etc.)
+## COPYRIGHT
 
-* Deployment instructions
+Copyright @ 2020 KSU College of Veterinary Medicine or original authors.
 
-* ...
+## Developed by
+
+Jake Willson
+K-State Senior in Computer Science
+(jakedwillson@ksu.edu)

@@ -22,9 +22,4 @@ module HomeHelper
   def filters_exist?
     @animal || @parameter
   end
-
-  def animal_indent_class(animal)
-    return "grandchild" if animal.is_grandchild?
-    "child" if animal.is_child?
-  end
 end

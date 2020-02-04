@@ -1,4 +1,5 @@
-<!--locals: { current_animal, animals, parameter }-->
+<!--When parameter selected but no animal selected -->
+<!--locals: { animals, parameter }-->
 <%= form_with(local: true, remote: false, url: home_set_animal_path) do |f| %>
   <%= f.hidden_field :parameter_id, :value => parameter.try(:id) %>
   <div class="card animal">
@@ -12,27 +13,27 @@
             <% css_class = animal_indent_class(animal) %>
             <% if css_class %>
               <div class="<%= css_class %>">
-                <% if animals.include?(animal) %>
+                <% if animal.has_parameter_data?(parameter) %>
                   <div class="radio-button-btn-wrapper mr-2">
-                    <%= f.radio_button :animal_id, "#{animal.id}", checked: current_animal == animal, class: "radio-button-btn-animal background-red" %>
+                    <%= f.radio_button :animal_id, "#{animal.id}", checked: false, class: "radio-button-btn-animal background-red" %>
                     <%= label_tag :animal_id, animal.name, class: "radio-button-btn-label white enabled" %>
                   </div>
                 <% else %>
                   <div class="radio-button-btn-wrapper mr-2">
-                    <%= f.radio_button :animal_id, "#{animal.id}", checked: current_animal == animal, class: "radio-button-btn-animal background-red", disabled: true %>
+                    <%= f.radio_button :animal_id, "#{animal.id}", checked: false, class: "radio-button-btn-animal background-red", disabled: true %>
                     <%= label_tag :animal_id, animal.name, class: "radio-button-btn-label white disabled" %>
                   </div>
                 <% end %>
               </div>
             <% else %>
-              <% if animals.include?(animal) %>
+              <% if animal.has_parameter_data?(parameter) %>
                 <div class="radio-button-btn-wrapper mr-2">
-                  <%= f.radio_button :animal_id, "#{animal.id}", checked: current_animal == animal, class: "radio-button-btn-animal background-red" %>
+                  <%= f.radio_button :animal_id, "#{animal.id}", checked: false, class: "radio-button-btn-animal background-red" %>
                   <%= label_tag :animal_id, animal.name, class: "radio-button-btn-label white enabled" %>
                 </div>
               <% else %>
                 <div class="radio-button-btn-wrapper mr-2">
-                  <%= f.radio_button :animal_id, "#{animal.id}", checked: current_animal == animal, class: "radio-button-btn-animal background-red", disabled: true %>
+                  <%= f.radio_button :animal_id, "#{animal.id}", checked: false, class: "radio-button-btn-animal background-red", disabled: true %>
                   <%= label_tag :animal_id, animal.name, class: "radio-button-btn-label white disabled" %>
                 </div>
               <% end %>
