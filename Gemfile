@@ -51,6 +51,8 @@ gem "rubyzip", ">= 1.3.0"
 gem 'csv', '~> 3.1', '>= 3.1.2'
 # Rack
 gem "rack", ">= 2.0.8"
+# Nokogiri
+gem "nokogiri", ">= 1.10.8"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
