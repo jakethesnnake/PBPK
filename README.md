@@ -18,6 +18,10 @@ aggregated by the K-State College of Veterinary Medicine
 
     rails s
 
+## Run test suite
+
+    rspec
+
 ## COPYRIGHT
 
 Copyright @ 2020 KSU College of Veterinary Medicine or original authors.
