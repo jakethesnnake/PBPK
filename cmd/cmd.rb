@@ -26,5 +26,8 @@ bundle install
 # run tests
 bundle exec rspec
 
+# development
+bundle exec rake db:drop db:create db:migrate db:seed RAILS_ENV=development
+
 # setup database
 bundle exec rake db:drop db:create db:migrate db:seed
