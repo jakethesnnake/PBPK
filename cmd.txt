@@ -1,0 +1,14 @@
+sudo apt install bundler # maybe unnecessary
+sudo apt-get install libsqlite3-dev
+sudo gem install bundler --version '2.0.2'
+sudo apt-get install zlib1g-dev
+sudo apt install gnupg2
+sudo bundle update
+sudo bundle install
+
+# RVM
+sudo gpg2 --keyserver hkp://pool.sks-keyservers.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+sudo curl -sSL https://get.rvm.io | sudo bash -s stable # install RVM
+sudo rvm use 2.5.1 --default
+sudo gem install rubygems-bundler
+sudo rvm install "ruby-2.5.1"
