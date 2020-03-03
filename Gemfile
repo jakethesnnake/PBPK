@@ -63,6 +63,8 @@ gem 'mina'
 gem 'rvm'
 # Passenger
 gem "passenger", ">= 5.0.25", require: "phusion_passenger/rack_handler"
+# pg
+# gem 'pg', '~> 1.2', '>= 1.2.2'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
