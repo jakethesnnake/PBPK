@@ -262,7 +262,7 @@ DEPENDENCIES
   nokogiri (>= 1.10.8)
   passenger (>= 5.0.25)
   pg (~> 1.2, >= 1.2.2)
-  puma (>= 3.12.2)
+  puma (>= 4.3.3)
   rack (>= 2.0.8)
   rails (~> 5.2.3)
   rspec (~> 3.8)
