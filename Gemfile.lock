@@ -250,7 +250,7 @@ DEPENDENCIES
   minitest (~> 5.12, >= 5.12.2)
   minitest-matchers (~> 1.4, >= 1.4.1)
   nokogiri (>= 1.10.8)
-  puma (>= 3.12.2)
+  puma (>= 4.3.3)
   rack (>= 2.0.8)
   rails (~> 5.2.3)
   rspec (~> 3.8)
