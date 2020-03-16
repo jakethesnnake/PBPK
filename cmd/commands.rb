@@ -1,95 +1,95 @@
-# ssh
+# Save IP ADDRESS Here
 
-167.172.221.202 # ip (old = 167.172.204.255)
-sudo ssh -i /mnt/c/Users/jaked/.ssh/pbpk root@167.172.221.202 # (laptop)
+x.x.x.x
 
-# (old ssh)
+## DEPLOYMENT INSTRUCTIONS (16 steps)
 
-sudo ssh -i /mnt/c/Users/jaked/.ssh/archive/cvm root@167.172.204.255
+## (1) installation
 
-## installation
 apt-get install zlib1g-dev libsqlite3-dev libpq-dev libcurl4-gnutls-dev curl nodejs
-apt install gnupg2 libcurl4 nginx ruby-bundler
-# (optional)
+
+apt install gnupg2 libcurl4 nginx ruby-bundler gpgv2
+
 apt-get install build-essential libssl-dev libyaml-dev libreadline-dev openssl curl git-core zlib1g-dev bison libxml2-dev libxslt1-dev libcurl4-openssl-dev nodejs libsqlite3-dev sqlite3
 
-## update and upgrade
-apt update && apt upgrade
-apt-get update && apt-get upgrade
+## (2) recovery keys
 
-# autoremove
-apt autoremove ; apt-get autoremove
+apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 561F9B9CAC40B2F7
 
-# add keys
-sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 561F9B9CAC40B2F7 # create pgp key
-sudo gpg2 --keyserver hkp://pool.sks-keyservers.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+## (3) clone git repository
 
-# create APT source file
-sudo nano /etc/apt/sources.list.d/passenger.list
+cd /var/www
+git clone https://github.com/jakethesnnake/PBPK.git pbpk
+cd pbpk
+git checkout master
 
-# git (inside home/rails directory)
-git clone https://github.com/jakethesnnake/CVM.git cvm
-cd cvm
-git checkout master # master-tmp for now
+## (4) REBOOT
 
-# CURL (install RVM)
-sudo curl -L https://get.rvm.io | sudo bash -s stable
-sudo curl -sSL -L https://get.rvm.io | sudo bash -s stable # (optional)
+reboot
 
-# REBOOT
-sudo reboot
+## (5) import gpg keys and install RVM with CURL
 
-## RVM requirements
+gpg2 --keyserver hkp://pool.sks-keyservers.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+curl -L https://get.rvm.io | bash -s stable
+
+## (6) REBOOT
+
+reboot
+
+## (7) Check RVM requirements
+
 rvm requirements
-# if missing requirements
+
+## (8) run this command if there are missing requirements
+
 rvmsudo /usr/bin/apt-get install build-essential openssl libreadline6-dev curl git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev automake libtool bison subversion
 
-# RVM
+## (9) RVM install (2.5.1)
+
 rvm install "ruby-2.5.1"
 rvm use 2.5.1 --default
-rvm rubygems current # install all required components
 
-# gems (within project directory)
+## (10) Gem Installs
+
+cd /var/www/pbpk
+gem install bundler --version '2.0.2'
 gem install rails -v '5.2.3'
 gem install passenger
-
-gem install ruby
-gem install bundler --version '2.0.2'
 gem install rubygems-bundler
 gem install nokogiri -v '1.10.9' --source 'https://rubygems.org/'
 
-## Passenger
+## (11) bundle
+
+bundle
+
+## (12) allocate space for passenger and avoid warning
+
+dd if=/dev/zero of=/swap bs=1M count=1024 ; mkswap /swap ; swapon /swap
+export rvmsudo_secure_path=1
+
+## (13) Passenger
+
 rvmsudo passenger-install-nginx-module
-# if modification required
-sudo dd if=/dev/zero of=/swap bs=1M count=1024
-sudo mkswap /swap
-sudo swapon /swap
+    # select Ruby
+    # enter (1)
 
-# (?) start server
-sudo service nginx start
+## (14) Run Test Suite and Setup Database
 
-# bundle
-bundle install
-
-# tests
 rails db:migrate RAILS_ENV=test
-bundle exec rspec
+rspec
+rake db:drop db:create db:migrate db:seed RAILS_ENV=development
 
-# database
-bundle exec rake db:drop db:create db:migrate db:seed RAILS_ENV=development # deployment
+## (15) start up network and bind to port 3000
 
-# validate and view processes
-# rvmsudo passenger-config validate-install 
-# rvmsudo passenger-memory-stats
-
-# RELOAD AND RESTART
-nginx -s quit # stop all processes
-nginx -s reload # apply changes to config file
-sudo nginx -t # verify syntax
-sudo systemctl restart nginx.service # restart nginx
-sudo systemctl reload nginx # opt??
-sudo systemctl restart nginx # opt??
-
-# start passenger
-
+service nginx start
+kill $(lsof -t -i :3000)
+service nginx restart
 passenger start -a 127.0.0.1 -p 3000 -d -e development
+
+## (16) restart network
+
+nginx -s quit ; nginx -s reload
+systemctl restart nginx.service ; systemctl reload nginx
+systemctl restart nginx ; service nginx restart
+
+## APPLICATION SHOULD BE LIVE (visit public IP address)
