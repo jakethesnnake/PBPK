@@ -32,4 +32,4 @@ Jake Willson (jakedwillson@ksu.edu)
 
 ## Repository
 
-https://github.com/jakethesnnake/CVM
+https://github.com/jakethesnnake/PBPK
