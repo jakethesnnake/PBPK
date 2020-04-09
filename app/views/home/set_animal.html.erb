@@ -5,6 +5,8 @@
 
     <% if @parameter.try(:id) == 5 %>
       <%= render partial: 'hemat_table', locals: { animal: @animal } %>
+    <% elsif @parameter.try(:id) == 2 %>
+      <%= render partial: 'cardiac_output_table', locals: { animal: @animal, parameter: @parameter } %>
     <% else %>
       <%= render partial: 'table', locals: { animal: @animal, parameter: @parameter } %>
     <% end %>

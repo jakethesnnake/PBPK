@@ -71,6 +71,10 @@ ActiveRecord::Schema.define(version: 2020_01_12_011417) do
     t.string "t_test"
     t.decimal "body_weight"
     t.string "age"
+    t.decimal "mean_male"
+    t.decimal "mean_female"
+    t.string "range"
+    t.string "production_class"
     t.index ["parameter_id"], name: "index_weights_on_parameter_id"
   end
 

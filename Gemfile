@@ -26,6 +26,8 @@ gem 'jbuilder', '~> 2.5'
 gem 'haml', '~> 5.1', '>= 5.1.2'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
+# actionview
+gem "actionview", ">= 5.2.4.2"
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password

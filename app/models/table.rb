@@ -6,10 +6,6 @@ class Table < ApplicationRecord
 
   validates :animal2_id, presence: true, allow_blank: true
 
-  def is_numbered?
-    raise Exception
-  end
-
   def collective_citations
     c_arr = []
     table_citations.each do |pair|

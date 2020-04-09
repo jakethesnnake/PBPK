@@ -18,6 +18,16 @@ class CreateWeights < ActiveRecord::Migration[5.2]
       # (hemat)
       t.decimal :body_weight, null: true
       t.string :age, null: true
+
+      # sex
+      t.decimal :mean_male, null: true
+      t.decimal :mean_female, null: true
+
+      # range
+      t.string :range, null: true
+
+      # production class
+      t.string :production_class, null: true
     end
   end
 end

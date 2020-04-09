@@ -40,7 +40,7 @@ div.submit-container {
   background-color: var(--filter-bg-color);
   column-count: 2;
   column-fill: auto;   /* Cattle <-> Swine separation */
-  height: 430px;   /* Cattle <-> Swine separation */
+  height: 450px;   /* Cattle <-> Swine separation */
 }
 .card-body-parameter {
   color: #2196f3;

@@ -3,12 +3,14 @@
 
 require 'csv'
 
-require_relative 'setup_blocks/read_tables.rb'
+require_relative 'setup_blocks/read_csv_tables.rb'
+require_relative 'setup_blocks/create_virtual_tables.rb'
 
-include ReadTables
+include CreateVirtualTables
+include ReadCsvTables
 
 animals = [
-    { name: "Adult Cattle", id: 21, },
+    { name: "Adult Cattle", id: 21 },
     { name: "Calves", id: 10 },
     { name: "Beef Cattle", id: 2 },
       { name: "Male Beef Cattle", id: 8, parent_id: 2 },
@@ -25,7 +27,12 @@ animals = [
       { name: "Market-Age Swine", id: 14, parent_id: 11 },
       { name: "Growing Swine", id: 15, parent_id: 11 },
       { name: "Aged Swine", id: 16, parent_id: 11 },
-      { name: "Different Age Groups of Swine", id: 17, parent_id: 11 }
+      { name: "Different Age Groups of Swine", id: 17, parent_id: 11 },
+
+    { name: "Chicken", id: 22 },
+      { name: "Broiler Chickens", id: 23, parent_id: 22 },
+      { name: "Laying Hens", id: 24, parent_id: 22 },
+    { name: "Turkey", id: 25 }
 ]
 organs = [
     { name: "Adrenals", id: 1 },
@@ -67,14 +74,35 @@ organs = [
     { name: "Stomachs", id: 37, parent_id: 6 },
     { name: "Stomach", id: 38, parent_id: 6 },
     { name: "Skin", id: 39 },
-    { name: "Cardiac Output (L/h/kg Body Weight)", id: 40 },
+    { name: "Cardiac Output (L/h/kg)", id: 40 },
     { name: "Hepatic Artery", id: 41 },
     { name: "Portal Vein", id: 42 },
     { name: "Adrenal", id: 43 },
     { name: "Pituitary Gland", id: 44 },
     { name: "Loin Muscle", id: 45 },
     { name: "Gastrocnemius Muscle", id: 46 },
-    { name: "Hematocrit Percentage", id: 47 }
+    { name: "Hematocrit Percentage", id: 47 },
+    { name: "Abdominal Fat", id: 48 },
+    { name: "Adrenal Gland", id: 49 },
+    { name: "Bursa of Fabricius", id: 50 },
+    { name: "Gall Bladder", id: 51 },
+    { name: "Breast Muscle", id: 52 },
+    { name: "Crop", id: 53, parent_id: 37 },
+    { name: "Proventriculus", id: 54, parent_id: 37 },
+    { name: "Gizzard", id: 55, parent_id: 37 },
+    { name: "Duodenum", id: 56, parent_id: 13 },
+    { name: "Jejunum", id: 57, parent_id: 13 },
+    { name: "Ileum", id: 58, parent_id: 13 },
+    { name: "Cecum", id: 59, parent_id: 14 },
+    { name: "Colon and Rectum", id: 60, parent_id: 14 },
+    { name: "Infundibulum", id: 61 },
+    { name: "Magnum", id: 62 },
+    { name: "Isthmus", id: 63 },
+    { name: "Vagina", id: 64 },
+    { name: "Stroma", id: 65 },
+    { name: "Ovaries", id: 66 },
+    { name: "Oviduct", id: 67 },
+    { name: "Shell Gland", id: 68 }
 ]
 parameters = [
     {name: "Organ Weight", id: 1},
@@ -88,17 +116,6 @@ animals.each { |animal| Animal.create!(animal) }
 organs.each { |organ| Organ.create!(organ) }
 parameters.each { |parameter| Parameter.create!(parameter) }
 
-# creates table records (table-parameter-animal associations)
-ReadTables.create_table_objects
-
-# read all csv tables
-ReadTables.read_all
-
-# adds list of full citations
-ReadTables.read_full_citation_list
-
-# adds all table citations
-ReadTables.read_all_references
-
-# adds table only citations
-ReadTables.read_table_only_citations
+# Create virtual tables and read all csv data
+CreateVirtualTables.create_all_tables
+ReadCsvTables.execute_all
