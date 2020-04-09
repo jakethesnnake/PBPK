@@ -1,0 +1,6 @@
+organ_id,animal_id,production_class,parameter_id,mean,standard_deviation,sample_size,number_of_studies,reference_string,range
+40,22,All,2,9.88,2.07,320,17,"1,2-17",
+40,22,Broilers,2,10.6,1.95,115,9,"2, 5, 6-8, 11, 12, 14, 17",
+40,22,Laying Species*,2,9.44,2.13,205,8,"1, 3, 4, 9, 10, 13, 15, 16",
+40,22,Laying Hens,2,9.39,1.81,127,6,"4, 9, 10, 13, 16",
+40,25,,2,6.87,2.12,40,2,"1, 2",4.87-11.6

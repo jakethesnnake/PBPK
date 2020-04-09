@@ -6,6 +6,24 @@ RSpec.describe Animal, type: :model do
   let!(:p1) { FactoryBot.create(:parameter, id: 1) }
   let!(:p2) { FactoryBot.create(:parameter, id: 2) }
 
+  describe '#has_range_info?' do
+    subject { animal.has_range_info?(p1) }
+
+    let!(:organ) { FactoryBot.create(:organ) }
+
+    context 'when range info exists' do
+      let!(:weight) { FactoryBot.create(:weight, parameter_id: p1.id, animal_id: animal.id, organ_id: organ.id, range: "range") }
+
+      it { is_expected.to be_truthy }
+    end
+
+    context 'when range info does not exist' do
+      let!(:weight) { FactoryBot.create(:weight, parameter_id: p1.id, animal_id: animal.id, organ_id: organ.id, range: nil) }
+
+      it { is_expected.to be_falsey }
+    end
+  end
+
   describe '#organs_for_parameter' do
     subject { animal.organs_for_parameter(parameter) }
     let(:parameter) { p1 }

@@ -55,7 +55,7 @@ class Animal < ApplicationRecord
   # Public: returns ordered list of animals
   def self.ordered
     arr = []
-    ord = [21,10,2,8,9,6,7,3,4,5,11,12,13,14,15,16,17]
+    ord = [21,10,2,8,9,6,7,3,4,5,11,12,13,14,15,16,17,22,23,24,25]
 
     ord.each do |num|
       arr << Animal.find_by_id(num)
@@ -120,7 +120,12 @@ class Animal < ApplicationRecord
   # returns [] if none present or if parameter invalid
   def organs_for_parameter(parameter)
     return unless parameter.is_a?(Parameter)
-    Weight.where(animal_id: id, parameter_id: parameter.id).map { |weight| Organ.find_by_id(weight.organ_id) }
+    organs = []
+    Weight.where(animal_id: id, parameter_id: parameter.id).each do |weight|
+      org = Organ.find_by_id(weight.organ_id)
+      organs << org unless organs.include?(org)
+    end
+    organs
   end
 
   # Public: returns all hemat data for animal, if it exists
@@ -137,6 +142,19 @@ class Animal < ApplicationRecord
     return unless parameter.is_a?(Parameter)
     weights = weights_for_parameter(parameter)
     weights.count > 0
+  end
+
+  # Public: returns true if the animal has "range" data for this parameter
+  #
+  # returns false otherwise
+  def has_range_info?(parameter)
+    return unless parameter.is_a?(Parameter)
+
+    Weight.where(animal_id: id, parameter_id: parameter.id).each do |weight|
+      return true if weight.range
+    end
+
+    false
   end
 
   private
