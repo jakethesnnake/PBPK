@@ -32,9 +32,11 @@ class HomeController < ApplicationController
     return redirect_to(root_url) unless @animal
 
     if @parameter
+      @parameters = [@parameter]
       @organs = @animal.organs_for_parameter(@parameter)
     else
       @parameters = @animal.parameters
+      @organs = []
     end
   end
 
