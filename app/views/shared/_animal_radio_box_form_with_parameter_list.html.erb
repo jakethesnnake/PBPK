@@ -1,0 +1,52 @@
+<!--When parameter selected but no animal selected -->
+
+
+<% animals = Animal.ordered %>
+<% active_animal_list = @parameter.try(:animals) || [] %>
+
+
+<%= form_with(local: true, remote: false, url: home_set_animal_path) do |f| %>
+  <%= f.hidden_field :parameter_id, :value => nil %>
+  <div class="card animal">
+    <article class="card-group-item">
+      <header class="card-header">
+        <h6 class="title">Animal</h6>
+      </header>
+      <div class="filter-content">
+        <div class="card-body-animal">
+          <% animals.each do |animal| %>
+            <% css_class = animal_indent_class(animal) %>
+            <% if css_class %>
+              <div class="<%= css_class %>">
+                <% if active_animal_list.include?(animal) %>
+                  <div class="radio-button-btn-wrapper mr-2">
+                    <%= f.radio_button :animal_id, "#{animal.id}", checked: true, class: "radio-button-btn-animal background-red" %>
+                    <%= label_tag :animal_id, animal.name, class: "radio-button-btn-label white enabled" %>
+                  </div>
+                <% else %>
+                  <div class="radio-button-btn-wrapper mr-2">
+                    <%= f.radio_button :animal_id, "#{animal.id}", checked: false, class: "radio-button-btn-animal background-red", disabled: true %>
+                    <%= label_tag :animal_id, animal.name, class: "radio-button-btn-label white disabled" %>
+                  </div>
+                <% end %>
+              </div>
+            <% else %>
+              <% if active_animal_list.include?(animal) %>
+                <div class="radio-button-btn-wrapper mr-2">
+                  <%= f.radio_button :animal_id, "#{animal.id}", checked: true, class: "radio-button-btn-animal background-red" %>
+                  <%= label_tag :animal_id, animal.name, class: "radio-button-btn-label white enabled" %>
+                </div>
+              <% else %>
+                <div class="radio-button-btn-wrapper mr-2">
+                  <%= f.radio_button :animal_id, "#{animal.id}", checked: false, class: "radio-button-btn-animal background-red", disabled: true %>
+                  <%= label_tag :animal_id, animal.name, class: "radio-button-btn-label white disabled" %>
+                </div>
+              <% end %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </article>
+  </div>
+  <%= f.submit '', class: 'd-none', id: 'submitMyForm-animal' %>
+<% end %>

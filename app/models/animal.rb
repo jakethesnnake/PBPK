@@ -55,7 +55,7 @@ class Animal < ApplicationRecord
   # Public: returns ordered list of animals
   def self.ordered
     arr = []
-    ord = [21,10,2,8,9,6,7,3,4,5,11,12,13,14,15,16,17,22,23,24,25]
+    ord = [21,10,2,8,9,6,7,3,4,5,11,12,13,14,15,16,17,22,23,24,25,26,27,28,29]
 
     ord.each do |num|
       arr << Animal.find_by_id(num)

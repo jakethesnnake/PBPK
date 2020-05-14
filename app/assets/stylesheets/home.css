@@ -1,6 +1,6 @@
 :root {
   --filter-bg-color: antiquewhite;
-  --default-side-margin: 100px;
+  --default-side-margin: 90px;
   --default-font-size: 22px;
 }
 .container {
@@ -38,7 +38,7 @@ div.submit-container {
 .card-body-animal {
   color: #2196f3;
   background-color: var(--filter-bg-color);
-  column-count: 2;
+  column-count: 3;
   column-fill: auto;   /* Cattle <-> Swine separation */
   height: 450px;   /* Cattle <-> Swine separation */
 }
@@ -107,7 +107,7 @@ div.indent-grandchild {
   -ms-user-select: none;
   user-select: none;
   align-items: center;
-  width: 800px;
+  width: 900px;
 }
 .card.parameter {
   display: block;

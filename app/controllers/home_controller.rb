@@ -15,10 +15,11 @@ class HomeController < ApplicationController
     return redirect_to(root_url) unless @parameter
 
     if @animal
-      @parameters = @animal.parameters
-      @organs = @animal.organs_for_parameter(@parameter) unless @parameter.id == 5
+      @parameters = [@parameter]
+      @organs = @animal.organs_for_parameter(@parameter)
     else
-      @organs = nil
+      @parameters = Parameter.all
+      @organs = []
     end
 
     redirect_to(root_url) unless @parameters && @animals
@@ -26,13 +27,15 @@ class HomeController < ApplicationController
 
   def set_animal
     @animal = Animal.find_by_id(params[:animal_id])
+    @parameter = Parameter.find_by_id(params[:parameter_id])
 
     return redirect_to(root_url) unless @animal
 
-    @parameters = @animal.parameters
-    parameter = Parameter.find_by_id(params[:parameter_id])
-    @parameters.include?(parameter) ? @parameter = parameter : @parameter = @parameters.first
-    @organs = @animal.organs_for_parameter(@parameter)
+    if @parameter
+      @organs = @animal.organs_for_parameter(@parameter)
+    else
+      @parameters = @animal.parameters
+    end
   end
 
   def empty

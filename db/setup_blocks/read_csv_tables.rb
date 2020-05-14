@@ -9,6 +9,7 @@ module ReadCsvTables
   def read_all_citations
     CSV.read("db/csv-tables/1/full-citation-list.csv", :headers => true).each { |row| Citation.create!(row.to_h) }
     CSV.read("db/csv-tables/2/full-citation-list.csv", :headers => true).each { |row| Citation.create!(row.to_h) }
+    CSV.read("db/csv-tables/3/full-citation-list.csv", :headers => true).each { |row| Citation.create!(row.to_h) }
   end
 
   def read_all_weight_data
@@ -43,6 +44,15 @@ module ReadCsvTables
     CSV.read("db/csv-tables/2/table15.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
     CSV.read("db/csv-tables/2/table17.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
     CSV.read("db/csv-tables/2/table19-20.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
+    # (3) Sheep/Goat
+    CSV.read("db/csv-tables/3/table4.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
+    CSV.read("db/csv-tables/3/table5.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
+    CSV.read("db/csv-tables/3/table8.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
+    CSV.read("db/csv-tables/3/table9-10.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
+    CSV.read("db/csv-tables/3/table11.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
+    CSV.read("db/csv-tables/3/table15.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
+    CSV.read("db/csv-tables/3/table16.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
+    CSV.read("db/csv-tables/3/table18-21.csv", :headers => true).each { |row| Weight.create!(row.to_h) }
   end
 
   def read_all_references
@@ -76,6 +86,10 @@ module ReadCsvTables
     CSV.read("db/csv-tables/2/citations/table41-42.csv", :headers => true).each { |row| TableCitation.add!(row.to_h) }
     CSV.read("db/csv-tables/2/citations/table43-44.csv", :headers => true).each { |row| TableCitation.add!(row.to_h) }
     CSV.read("db/csv-tables/2/citations/table45-46.csv", :headers => true).each { |row| TableCitation.add!(row.to_h) }
+    CSV.read("db/csv-tables/3/citations/table4.csv", :headers => true).each { |row| TableCitation.add!(row.to_h) }
+    CSV.read("db/csv-tables/3/citations/table5.csv", :headers => true).each { |row| TableCitation.add!(row.to_h) }
+    CSV.read("db/csv-tables/3/citations/table8.csv", :headers => true).each { |row| TableCitation.add!(row.to_h) }
+    CSV.read("db/csv-tables/3/citations/table11.csv", :headers => true).each { |row| TableCitation.add!(row.to_h) }
   end
 
   def read_table_only_citations
@@ -84,5 +98,9 @@ module ReadCsvTables
     CSV.read("db/csv-tables/1/citations/table_only/table13-17.csv", :headers => true).each { |row| TableCitation.add!(row.to_h) }
     CSV.read("db/csv-tables/1/citations/table_only/table29-33.csv", :headers => true).each { |row| TableCitation.add!(row.to_h) }
     CSV.read("db/csv-tables/1/citations/table_only/table34-37.csv", :headers => true).each { |row| TableCitation.add!(row.to_h) }
+    CSV.read("db/csv-tables/3/citations/table_only/table9.csv", :headers => true).each { |row| TableCitation.add!(row.to_h) }
+    CSV.read("db/csv-tables/3/citations/table_only/table10.csv", :headers => true).each { |row| TableCitation.add!(row.to_h) }
+    CSV.read("db/csv-tables/3/citations/table_only/table15-16.csv", :headers => true).each { |row| TableCitation.add!(row.to_h) }
+    CSV.read("db/csv-tables/3/citations/table_only/table18-21.csv", :headers => true).each { |row| TableCitation.add!(row.to_h) }
   end
 end
