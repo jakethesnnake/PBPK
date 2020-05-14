@@ -7,7 +7,9 @@
 
 <div class="row">
   <div class="animal">
-    <% if @parameter && @animal.nil? %>
+    <% if @parameter && @animal %>
+      <%= render :partial => 'shared/animal_radio_box_form_with_parameter', locals: { current_animal: @animal, parameter: @parameter } %>
+    <% elsif @parameter %>
       <%= render :partial => 'shared/animal_radio_box_form_filtered', locals: { animals: @animals, parameter: @parameter } %>
     <% else %>
       <%= render :partial => 'shared/animal_radio_box_form', locals: { current_animal: @animal, animals: @animals, parameter: @parameter } %>
