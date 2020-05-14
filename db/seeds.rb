@@ -10,11 +10,12 @@ include CreateVirtualTables
 include ReadCsvTables
 
 animals = [
+    # Tables (1)
     { name: "Adult Cattle", id: 21 },
     { name: "Calves", id: 10 },
     { name: "Beef Cattle", id: 2 },
-      { name: "Male Beef Cattle", id: 8, parent_id: 2 },
-      { name: "Female Beef Cattle", id: 9, parent_id: 2 },
+      { name: "Male", id: 8, parent_id: 2 },
+      { name: "Female", id: 9, parent_id: 2 },
       { name: "Angus", id: 6, parent_id: 2 },
       { name: "Hereford", id: 7, parent_id: 2 },
     { name: "Dairy Cows", id: 3 },
@@ -22,17 +23,24 @@ animals = [
       { name: "Holstein", id: 5, parent_id: 3 },
 
     { name: "Swine", id: 11 },
-      { name: "Male Swine", id: 12, parent_id: 11 },
-      { name: "Female Swine", id: 13, parent_id: 11 },
-      { name: "Market-Age Swine", id: 14, parent_id: 11 },
-      { name: "Growing Swine", id: 15, parent_id: 11 },
-      { name: "Aged Swine", id: 16, parent_id: 11 },
-      { name: "Different Age Groups of Swine", id: 17, parent_id: 11 },
+      { name: "Male", id: 12, parent_id: 11 },
+      { name: "Female", id: 13, parent_id: 11 },
+      { name: "Market-Age", id: 14, parent_id: 11 },
+      { name: "Growing", id: 15, parent_id: 11 },
+      { name: "Aged", id: 16, parent_id: 11 },
+      { name: "Different Age Groups", id: 17, parent_id: 11 },
 
+    # Tables (2)
     { name: "Chicken", id: 22 },
-      { name: "Broiler Chickens", id: 23, parent_id: 22 },
+      { name: "Broiler", id: 23, parent_id: 22 },
       { name: "Laying Hens", id: 24, parent_id: 22 },
-    { name: "Turkey", id: 25 }
+    { name: "Turkey", id: 25 },
+
+    # Tables (3)
+    { name: "Sheep", id: 26 },
+      { name: "Market-Age", id: 27, parent_id: 26 },
+      { name: "Lambs", id: 28, parent_id: 26 },
+    { name: "Goats", id: 29 }
 ]
 organs = [
     { name: "Adrenals", id: 1 },
@@ -102,7 +110,10 @@ organs = [
     { name: "Stroma", id: 65 },
     { name: "Ovaries", id: 66 },
     { name: "Oviduct", id: 67 },
-    { name: "Shell Gland", id: 68 }
+    { name: "Shell Gland", id: 68 },
+    { name: "Uterus (female)", id: 69 },
+    { name: "Udder (female)", id: 70 },
+    { name: "Doudenum", id: 71 }
 ]
 parameters = [
     {name: "Organ Weight", id: 1},

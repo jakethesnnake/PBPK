@@ -33,7 +33,7 @@ module CreateVirtualTables
         ## TURKEY/CHICKEN
 
         ## tables 1-3 (p1)
-        { id: 38, animal_id: 23, parameter_id: 1 }, # 1 => 38
+        { id: 38, animal_id: 23, parameter_id: 1 },
         { id: 39, animal_id: 24, parameter_id: 1 },
         { id: 40, animal_id: 25, parameter_id: 1 },
 
@@ -47,7 +47,30 @@ module CreateVirtualTables
 
         ## tables 19-20 (p5)
         { id: 45, animal_id: 22, parameter_id: 5 },
-        { id: 46, animal_id: 25, parameter_id: 5 }
+        { id: 46, animal_id: 25, parameter_id: 5 },
+
+        ## SHEEP/GOAT
+
+        ## tables 4,5,8 (p1)
+        { id: 47, animal_id: 27, parameter_id: 1 },
+        { id: 48, animal_id: 28, parameter_id: 1 },
+        { id: 49, animal_id: 29, parameter_id: 1 },
+
+        ## tables 9,10 (p2)
+        { id: 50, animal_id: 26, parameter_id: 2 },
+        { id: 51, animal_id: 29, parameter_id: 2 },
+
+        ## tables 11 (p3)
+        { id: 52, animal_id: 26, parameter_id: 3 },
+
+        ## tables 15,16 (p4)
+        { id: 53, animal_id: 27, parameter_id: 4 },
+        { id: 54, animal_id: 28, parameter_id: 4 },
+
+        ## tables 18,19,21 (p5)
+        { id: 55, animal_id: 27, parameter_id: 5 },
+        { id: 56, animal_id: 28, parameter_id: 5 },
+        { id: 57, animal_id: 29, parameter_id: 5 }
 
     ].each { |table| Table.create!(table) }
   end

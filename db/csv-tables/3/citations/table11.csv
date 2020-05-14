@@ -1,0 +1,13 @@
+table_id,author_name,year,volume,reference_number
+52,Hales,1973,c,1
+52,Hales,1976,,2
+52,Barnes,1983,,3
+52,Hales,1993,,4
+52,Hales,1973,b,5
+52,Gregory,1986,,6
+52,Alexander,1973,,7
+52,Hales,1973,a,8
+52,Gu,1985,,9
+52,Ullman,2001,,10
+52,Robillard,1980,,11
+52,Thompson,1980,,12
