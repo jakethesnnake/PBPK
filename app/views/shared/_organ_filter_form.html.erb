@@ -8,8 +8,8 @@
         <header class="card-header">
           <h6 class="title">Organs</h6>
           <% if animal && parameter %>
-            <%= link_to "Select All", home_filter_path(animal_id: animal.id, parameter_id: parameter.id), class: 'btn btn-primary' %>
-            <%= link_to "Unselect All", home_empty_path(animal_id: animal.id, parameter_id: parameter.id), class: 'btn btn-primary' %>
+            <%= link_to "Select All", home_filter_path(animal_id: animal.id, parameter_id: parameter.id), class: 'btn btn-dark' %>
+            <%= link_to "Unselect All", home_empty_path(animal_id: animal.id, parameter_id: parameter.id), class: 'btn btn-light' %>
           <% end %>
         </header>
         <div class="filter-content">
@@ -31,7 +31,7 @@
 
     <div class="submit-container">
       <div class="actions">
-        <%= form.submit "Filter", class: 'btn btn-primary' %>
+        <%= form.submit "Filter", class: 'btn btn-success btn-lg' %>
       </div>
     </div>
   <% end %>

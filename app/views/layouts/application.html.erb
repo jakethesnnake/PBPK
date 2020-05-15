@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Cattle</title>
+    <title>K-State PBPK Modeling</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -13,6 +13,28 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   </head>
+
+  <header>
+    <div class="logo-container">
+      <%= image_tag("k-state-purple.png", alt: "Edit Entry", class: 'logo') %>
+
+      <div class="introduction-text">
+        <div class="in-small-caps">
+          <%= "Physiological Parameters " %>
+        </div>
+
+        <div class="in-small-caps">
+          <%= "for PBPK Modeling in Food Animals" %>
+        </div>
+        
+        <div class="reset-filters">
+          <%= link_to("Reset Filters", root_path, class: 'btn btn-danger btn-lg') if filters_exist? %>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <hr>
 
   <body>
     <%= yield %>

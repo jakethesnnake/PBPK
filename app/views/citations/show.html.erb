@@ -1,14 +1,17 @@
 <%= link_to "Home", root_path, class: 'btn btn-primary' %>
 
-<h1>Compartment</h1>
-  <p class="weight-info">
+<div class="bold-label">
+  <h1>Compartment</h1>
+</div>
+<p class="weight-info">
     (Animal) : <%= @weight.animal_name %><br>
     (Organ) : <%= @weight.organ_name %><br>
     (Parameter) : <%= @weight.parameter.name %>
-  </p>
+</p>
 
-<div class="sources">
+<div class="bold-label">
   <h1>Sources</h1>
+</div>
   <% i = 0 %>
   <% @citations.each do |citation| %>
     <% i = i + 1 %>
@@ -16,9 +19,11 @@
       (<%= i %>) <%= citation.author_name %> et al. (<%= citation.year %>)
     </div>
   <% end %>
-</div>
 
-<h1>Full Citations</h1>
+
+<div class="bold-label">
+  <h1>Full Citations</h1>
+</div>
   <% i = 0 %>
   <% @citations.each do |citation| %>
     <% i = i + 1 %>
@@ -27,8 +32,9 @@
     </p>
   <% end %>
 
+
 <style>
   body {
-    background-color: lightgoldenrodyellow;
+    background-color: mediumpurple;
   }
 </style>
