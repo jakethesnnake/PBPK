@@ -13,6 +13,9 @@
  *= require_tree .
  *= require_self
  */
+* {
+  font-variant: small-caps;
+}
 .footer {
   position: fixed;
   left: 0;
@@ -21,4 +24,17 @@
   background-color: grey;
   color: white;
   text-align: center;
+}
+.logo-container {
+  display: flex;
+}
+.in-small-caps {
+  font-size: 60px;
+  font-weight: 500;
+  font-variant: small-caps;
+}
+.logo {
+  margin: 6px;
+  width: calc(30% - 80px);
+  height: calc(30% - 80px);
 }
